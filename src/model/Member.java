@@ -5,22 +5,23 @@
  */
 package model;
 
-/**
- *
- * @author SKY-PC
- */
+import java.util.ArrayList;
+
 public class Member extends User{
     private String address;
     private int point;
+    ArrayList<Booking> bookings = new ArrayList<Booking>();
     
     public Member(){
     }
-    
-    public Member(String email, String fullName, String password, String phoneNum, String address, int point){
+
+    public Member(String address, int point, String email, String fullName, String password, String phoneNum, ArrayList<Booking> bookings) {
         super(email, fullName, password, phoneNum);
         this.address = address;
         this.point = point;
+        this.bookings = bookings;
     }
+
 
     public String getAddress() {
         return address;
@@ -36,6 +37,14 @@ public class Member extends User{
 
     public void setPoint(int point) {
         this.point = point;
+    }
+
+    public ArrayList<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(ArrayList<Booking> bookings) {
+        this.bookings = bookings;
     }
     
     

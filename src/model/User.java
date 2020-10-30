@@ -5,10 +5,6 @@
  */
 package model;
 
-/**
- *
- * @author Andreas
- */
 public class User {
     private String email;
     private String fullName;

@@ -5,29 +5,26 @@
  */
 package model;
 
-/**
- *
- * @author Andreas
- */
-public class Pesawat {
+public class Pesawat extends Maskapai{
     String idPesawat;
     String tipePesawat;
     int hargaKursi;
-    int hargaBagasiPerKG;
+    int hargaBagasiPerKg;
     int kapasitasBagasi;
     
     public Pesawat(){
         
     }
 
-    public Pesawat(String idPesawat, String tipePesawat, int hargaKursi, int hargaBagasiPerKG, int kapasitasBagasi) {
+    public Pesawat(String idPesawat, String tipePesawat, int hargaKursi, int hargaBagasiPerKg, int kapasitasBagasi, String kodeMaskapai, String notelpMaskapai, String namaMaskapai) {
+        super(kodeMaskapai, notelpMaskapai, namaMaskapai);
         this.idPesawat = idPesawat;
         this.tipePesawat = tipePesawat;
         this.hargaKursi = hargaKursi;
-        this.hargaBagasiPerKG = hargaBagasiPerKG;
+        this.hargaBagasiPerKg = hargaBagasiPerKg;
         this.kapasitasBagasi = kapasitasBagasi;
     }
-
+    
     public String getIdPesawat() {
         return idPesawat;
     }
@@ -52,12 +49,12 @@ public class Pesawat {
         this.hargaKursi = hargaKursi;
     }
 
-    public int getHargaBagasiPerKG() {
-        return hargaBagasiPerKG;
+    public int getHargaBagasiPerKg() {
+        return hargaBagasiPerKg;
     }
 
-    public void setHargaBagasiPerKG(int hargaBagasiPerKG) {
-        this.hargaBagasiPerKG = hargaBagasiPerKG;
+    public void setHargaBagasiPerKg(int hargaBagasiPerKg) {
+        this.hargaBagasiPerKg = hargaBagasiPerKg;
     }
 
     public int getKapasitasBagasi() {
@@ -67,4 +64,5 @@ public class Pesawat {
     public void setKapasitasBagasi(int kapasitasBagasi) {
         this.kapasitasBagasi = kapasitasBagasi;
     }
+    
 }
