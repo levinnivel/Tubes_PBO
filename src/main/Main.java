@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 package main;
+import view.*;
 
 public class Main {
     public static void main(String[] args){
-        
+        new LoginScreen();
     }
 }
