@@ -15,13 +15,12 @@ public class Member extends User{
     public Member(){
     }
 
-    public Member(String address, int point, String email, String fullName, String password, String phoneNum, ArrayList<Booking> bookings) {
+    public Member(String email, String fullName, String password, String phoneNum, String address, int point, ArrayList<Booking> bookings) {
         super(email, fullName, password, phoneNum);
         this.address = address;
         this.point = point;
         this.bookings = bookings;
     }
-
 
     public String getAddress() {
         return address;
@@ -46,6 +45,5 @@ public class Member extends User{
     public void setBookings(ArrayList<Booking> bookings) {
         this.bookings = bookings;
     }
-    
     
 }
