@@ -13,7 +13,10 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -32,6 +35,7 @@ public class SearchPesawat implements ActionListener{
     JLabel labKotaTujuan = new JLabel("Kota Tujuan");
     JLabel labTanggalKeberangkatan = new JLabel("Tanggal Keberangkatan");
     JLabel labTipePenerbangan = new JLabel("Kelas Penerbangan");
+    JLabel labJmlPenumpang = new JLabel("Jumlah Penumpang");
     //text field
     JTextField tfKotaAsal = new JTextField();
     JTextField tfKotaTujuan = new JTextField();
@@ -39,6 +43,8 @@ public class SearchPesawat implements ActionListener{
     JComboBox cbTipePenerbangan = new JComboBox();
     //button
     JButton butSearch = new JButton("Search");
+    SpinnerModel value = new SpinnerNumberModel(1, 1, 7, 1);
+    JSpinner jmlPenumpang = new JSpinner(value);
     public SearchPesawat(){
         //set frame
         bookingFrame.setSize(600, 400);
@@ -73,8 +79,12 @@ public class SearchPesawat implements ActionListener{
         cbTipePenerbangan = new JComboBox(sTipePenerbangan);
         cbTipePenerbangan.setBounds(300, 180, 100, 30);
         
+        //label tipe jumlah penumpang
+        labJmlPenumpang.setBounds(50, 220, 200, 30);
+        jmlPenumpang.setBounds(300, 220, 50, 30);
+        
         //button cari jadwal
-        butSearch.setBounds(400, 250, 100, 30);
+        butSearch.setBounds(400, 300, 100, 30);
         butSearch.addActionListener(this);
         
         //add to frame
@@ -87,6 +97,8 @@ public class SearchPesawat implements ActionListener{
         bookingFrame.add(labTipePenerbangan);
         bookingFrame.add(cbTipePenerbangan);
         bookingFrame.add(datePicker);
+        bookingFrame.add(labJmlPenumpang);
+        bookingFrame.add(jmlPenumpang);
         bookingFrame.add(butSearch);
     }
 
@@ -96,7 +108,7 @@ public class SearchPesawat implements ActionListener{
         switch(command){
             case "Search":
                 bookingFrame.dispose();
-                new ProfileMenu();
+                new ChooseSchedule();
                 break;
         }
     }
