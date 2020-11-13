@@ -121,12 +121,12 @@ public class GuestMemberMenu implements ActionListener{
         }
     }
     
-    public static void main(String[] args){
-        ArrayList<Booking> bookingsExample = new ArrayList<Booking>();
-        User memTest = new Member("levin@gmail.com", "Levin Martinus Budiarto", "levin", "081802014646", "Jl. Moh Toha 12", 100, bookingsExample);
-        
-        User gueTest = new User();
-        
-        new GuestMemberMenu(memTest);
-    }
+//    public static void main(String[] args){
+//        ArrayList<Booking> bookingsExample = new ArrayList<Booking>();
+//        User memTest = new Member("levin@gmail.com", "Levin Martinus Budiarto", "levin", "081802014646", "Jl. Moh Toha 12", 100, bookingsExample);
+//        
+//        User gueTest = new User();
+//        
+//        new GuestMemberMenu(memTest);
+//    }
 }

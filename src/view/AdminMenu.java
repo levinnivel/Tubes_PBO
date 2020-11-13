@@ -93,8 +93,8 @@ public class AdminMenu implements ActionListener{
         }
     }
     
-    public static void main(String[] args){
-        Admin admTest = new Admin("levin@gmail.com", "Levin Martinus Budiarto", "levin", "081802014646", "AD-01", 4500000);
-        new AdminMenu(admTest);
-    }
+//    public static void main(String[] args){
+//        Admin admTest = new Admin("levin@gmail.com", "Levin Martinus Budiarto", "levin", "081802014646", "AD-01", 4500000);
+//        new AdminMenu(admTest);
+//    }
 }
