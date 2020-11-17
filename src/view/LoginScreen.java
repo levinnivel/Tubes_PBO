@@ -10,8 +10,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import controller.DatabaseHandler;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import model.Member;
+import model.Admin;
+import model.User;
+
 
 public class LoginScreen implements ActionListener{
+    static DatabaseHandler conn = new DatabaseHandler();
+    
     JFrame loginFrame = new JFrame();
     JLabel labTitle = new JLabel("Welcome to Our Booking Apps!");
     JLabel labCredit = new JLabel("By Levin, Aristo, Andreas V");
@@ -66,8 +76,56 @@ public class LoginScreen implements ActionListener{
         String command = e.getActionCommand();
         switch(command){
             case "Login":
-                loginFrame.dispose();
-                JOptionPane.showMessageDialog(loginFrame,"Selamat datang <user>!");
+                String[] opt = {"Admin", "Member"};
+                int logType = JOptionPane.showOptionDialog(loginFrame, "Masuk sebagai ", "Pilih", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opt, null);
+                conn.connect();
+                if(logType==0){
+                    try {
+                        String query = "SELECT * FROM admin WHERE emailAdmin='" + tfUsername.getText() + "'AND passwordAdmin='" + tfPassword.getText() + "'";
+                        Statement stmt = conn.con.createStatement();
+                        ResultSet rs = stmt.executeQuery(query);
+                        if(rs.next()) {
+                            Admin logUser = new Admin();
+                            logUser.setEmail(rs.getString("emailAdmin"));
+                            logUser.setFullName(rs.getString("fullNameAdmin"));
+                            logUser.setPassword(rs.getString("passwordAdmin"));
+                            logUser.setPhoneNum(rs.getString("phoneNumAdmin"));
+                            logUser.setKodeAdmin(rs.getString("kodeAdmin"));
+                            logUser.setPayroll(rs.getInt("payrollAdmin"));
+                            loginFrame.dispose();
+                            JOptionPane.showMessageDialog(loginFrame,"Selamat datang " + logUser.getFullName() + "!");
+                            new AdminMenu(logUser);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(loginFrame, "Pengisian ada yang salah!", "Login Error",JOptionPane.WARNING_MESSAGE);
+                        }
+                    } catch (SQLException excLog) {
+                        excLog.printStackTrace();
+                    }
+                }else{
+                    try {
+                        String query = "SELECT * FROM member WHERE emailMember='" + tfUsername.getText() + "'AND passwordMember='" + tfPassword.getText() + "'";
+                        Statement stmt = conn.con.createStatement();
+                        ResultSet rs = stmt.executeQuery(query);
+                        if(rs.next()) {
+                            Member logUser = new Member();
+                            logUser.setEmail(rs.getString("emailMember"));
+                            logUser.setFullName(rs.getString("fullNameMember"));
+                            logUser.setPassword(rs.getString("passwordMember"));
+                            logUser.setPhoneNum(rs.getString("phoneNumMember"));
+                            logUser.setAddress(rs.getString("addressMember"));
+                            logUser.setPoint(rs.getInt("poinMember"));
+                            loginFrame.dispose();
+                            JOptionPane.showMessageDialog(loginFrame,"Selamat datang " + logUser.getFullName() + "!");
+                            new GuestMemberMenu(logUser);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(loginFrame, "Pengisian ada yang salah!", "Login Error",JOptionPane.WARNING_MESSAGE);
+                        }
+                    } catch (SQLException excLog) {
+                        excLog.printStackTrace();
+                    }
+                }
                 break;
             case "Login as Guest":
                 loginFrame.dispose();
