@@ -74,7 +74,7 @@ public class EditScheduleMainScreen implements ActionListener{
         }
     }
 
-    public static void main(String[] args){
-        new EditScheduleMainScreen();
-    }
+//    public static void main(String[] args){
+//        new EditScheduleMainScreen();
+//    }
 }
