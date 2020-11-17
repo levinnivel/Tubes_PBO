@@ -17,6 +17,7 @@ import java.sql.Statement;
 import model.Member;
 import model.Admin;
 import model.User;
+import model.UserManager;
 
 
 public class LoginScreen implements ActionListener{
@@ -28,7 +29,7 @@ public class LoginScreen implements ActionListener{
     JLabel labUsername = new JLabel("Username : ");
     JLabel labPassword = new JLabel("Password : ");
     JTextField tfUsername = new JTextField();
-    JTextField tfPassword = new JTextField();
+    JPasswordField pfPassword = new JPasswordField();
     JButton buttonLoginDefault = new JButton("Login"); //Login by inserting username and password
     JButton buttonLoginGuest = new JButton("Login as Guest");
     JButton buttonExit = new JButton("Exit");
@@ -46,7 +47,7 @@ public class LoginScreen implements ActionListener{
         labPassword.setBounds(100,180, 80,30);
         
         tfUsername.setBounds(200,140, 200,30);
-        tfPassword.setBounds(200,180, 200,30);
+        pfPassword.setBounds(200,180, 200,30);
         
         buttonLoginDefault.setBounds(100,250, 100,25);
         buttonLoginDefault.setActionCommand("Login");
@@ -56,7 +57,7 @@ public class LoginScreen implements ActionListener{
         buttonLoginGuest.setActionCommand("Login as Guest");
         buttonLoginGuest.addActionListener(this);
         
-        buttonExit.setBounds(150,270, 100,25);
+        buttonExit.setBounds(150,280, 100,25);
         buttonExit.setActionCommand("Exit");
         buttonExit.addActionListener(this);
         
@@ -65,7 +66,7 @@ public class LoginScreen implements ActionListener{
         loginFrame.add(labUsername);
         loginFrame.add(labPassword);
         loginFrame.add(tfUsername);
-        loginFrame.add(tfPassword);
+        loginFrame.add(pfPassword);
         loginFrame.add(buttonLoginDefault);
         loginFrame.add(buttonLoginGuest);
         loginFrame.add(buttonExit);
@@ -81,43 +82,47 @@ public class LoginScreen implements ActionListener{
                 conn.connect();
                 if(logType==0){
                     try {
-                        String query = "SELECT * FROM admin WHERE emailAdmin='" + tfUsername.getText() + "'AND passwordAdmin='" + tfPassword.getText() + "'";
+                        String query = "SELECT * FROM admin WHERE kodeAdmin='" + tfUsername.getText() + "'AND passwordAdmin='" + pfPassword.getText() + "'";
                         Statement stmt = conn.con.createStatement();
                         ResultSet rs = stmt.executeQuery(query);
                         if(rs.next()) {
-                            Admin logUser = new Admin();
-                            logUser.setEmail(rs.getString("emailAdmin"));
-                            logUser.setFullName(rs.getString("fullNameAdmin"));
-                            logUser.setPassword(rs.getString("passwordAdmin"));
-                            logUser.setPhoneNum(rs.getString("phoneNumAdmin"));
-                            logUser.setKodeAdmin(rs.getString("kodeAdmin"));
-                            logUser.setPayroll(rs.getInt("payrollAdmin"));
+                            Admin logAdmin = new Admin();
+                            logAdmin.setEmail(rs.getString("emailAdmin"));
+                            logAdmin.setFullName(rs.getString("fullNameAdmin"));
+                            logAdmin.setPassword(rs.getString("passwordAdmin"));
+                            logAdmin.setPhoneNum(rs.getString("phoneNumAdmin"));
+                            logAdmin.setKodeAdmin(rs.getString("kodeAdmin"));
+                            logAdmin.setPayroll(rs.getInt("payrollAdmin"));
+                            
+                            UserManager.getInstance().setAdmin(logAdmin);
                             loginFrame.dispose();
-                            JOptionPane.showMessageDialog(loginFrame,"Selamat datang " + logUser.getFullName() + "!");
-                            new AdminMenu(logUser);
+                            JOptionPane.showMessageDialog(loginFrame,"Selamat datang " + logAdmin.getFullName() + "!");
+                            new AdminMenu();
                         }
                         else{
-                            JOptionPane.showMessageDialog(loginFrame, "Pengisian ada yang salah!", "Login Error",JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(loginFrame, "Pengisian ada yang salah!", "Login Error",JOptionPane.WARNING_MESSAGE);
                         }
                     } catch (SQLException excLog) {
                         excLog.printStackTrace();
                     }
                 }else{
                     try {
-                        String query = "SELECT * FROM member WHERE emailMember='" + tfUsername.getText() + "'AND passwordMember='" + tfPassword.getText() + "'";
+                        String query = "SELECT * FROM member WHERE emailMember='" + tfUsername.getText() + "'AND passwordMember='" + pfPassword.getText() + "'";
                         Statement stmt = conn.con.createStatement();
                         ResultSet rs = stmt.executeQuery(query);
                         if(rs.next()) {
-                            Member logUser = new Member();
-                            logUser.setEmail(rs.getString("emailMember"));
-                            logUser.setFullName(rs.getString("fullNameMember"));
-                            logUser.setPassword(rs.getString("passwordMember"));
-                            logUser.setPhoneNum(rs.getString("phoneNumMember"));
-                            logUser.setAddress(rs.getString("addressMember"));
-                            logUser.setPoint(rs.getInt("poinMember"));
+                            Member logMember = new Member();
+                            logMember.setEmail(rs.getString("emailMember"));
+                            logMember.setFullName(rs.getString("fullNameMember"));
+                            logMember.setPassword(rs.getString("passwordMember"));
+                            logMember.setPhoneNum(rs.getString("phoneNumMember"));
+                            logMember.setAddress(rs.getString("addressMember"));
+                            logMember.setPoint(rs.getInt("poinMember"));
+                            
+                            UserManager.getInstance().setMember(logMember);
                             loginFrame.dispose();
-                            JOptionPane.showMessageDialog(loginFrame,"Selamat datang " + logUser.getFullName() + "!");
-                            new GuestMemberMenu(logUser);
+                            JOptionPane.showMessageDialog(loginFrame,"Selamat datang " + logMember.getFullName() + "!");
+                            new GuestMemberMenu();
                         }
                         else{
                             JOptionPane.showMessageDialog(loginFrame, "Pengisian ada yang salah!", "Login Error",JOptionPane.WARNING_MESSAGE);
@@ -128,8 +133,11 @@ public class LoginScreen implements ActionListener{
                 }
                 break;
             case "Login as Guest":
+                User logUser = new User();
+                UserManager.getInstance().setUser(logUser);
                 loginFrame.dispose();
                 JOptionPane.showMessageDialog(loginFrame,"Selamat datang Guest!");
+                new GuestMemberMenu();
                 break;
             case "Exit":
                 loginFrame.dispose();

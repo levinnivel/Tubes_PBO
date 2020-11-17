@@ -12,8 +12,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import view.GuestMenu.*;
 
 public class GuestMemberMenu implements ActionListener{
+    User user = UserManager.getInstance().getUser();
+    User member = UserManager.getInstance().getMember();
+    
     JFrame GMFrame = new JFrame();
     JLabel labName = new JLabel();
     JButton buttonRegister = new JButton("Register");
@@ -27,27 +31,27 @@ public class GuestMemberMenu implements ActionListener{
     JButton buttonRescheduleBook = new JButton("Reschedule Booking");
     JButton buttonLogout = new JButton("Logout");
     
-    public GuestMemberMenu(User user){
+    public GuestMemberMenu(){
         GMFrame.setSize(500,600);
         GMFrame.setLocationRelativeTo(null);
         GMFrame.setLayout(null);
         GMFrame.setVisible(true);
         
-        String name = user.getFullName();
-        labName = new JLabel("Hello, " + name + "!");
-        
-        
-        if(user instanceof Member){
+        if(user == null){
+            String name = member.getFullName();
+            labName = new JLabel("Hello, " + name + "!");
             buttonProfile.setActionCommand("Profile");
             buttonProfile.addActionListener(this);
             buttonProfile.setBounds(100,150, 300,40);
             GMFrame.add(buttonProfile);
         }else{
+            labName = new JLabel("Hello, Guest!");
             buttonRegister.setActionCommand("Register");
             buttonRegister.addActionListener(this);
             buttonRegister.setBounds(100,150, 300,40);
             GMFrame.add(buttonRegister);
         }
+        labName.setBounds(75,50, 200,20);
         
         buttonTopUp.setActionCommand("Top Up");
         buttonTopUp.addActionListener(this);
@@ -77,6 +81,7 @@ public class GuestMemberMenu implements ActionListener{
         buttonLogout.addActionListener(this);
         buttonLogout.setBounds(100,500, 300,40);
         
+        GMFrame.add(labName);
         GMFrame.add(buttonTopUp);
         GMFrame.add(buttonBookTicket);
         GMFrame.add(buttonPayment);
@@ -92,9 +97,11 @@ public class GuestMemberMenu implements ActionListener{
         switch(command){
             case "Profile":
                 GMFrame.dispose();
+                new ProfileMenu();
                 break;
             case "Register":
                 GMFrame.dispose();
+                new RegisterScreen();
                 break;
             case "Top Up":
                 GMFrame.dispose();
@@ -118,6 +125,7 @@ public class GuestMemberMenu implements ActionListener{
                 if (JOptionPane.showConfirmDialog(null, "Apakah anda yakin untuk logout?", "WARNING",
                         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     GMFrame.dispose();
+                    UserManager.getInstance().setMember(null);
                     JOptionPane.showMessageDialog(GMFrame,"Akun telah di-logout.");
                     new LoginScreen();
                 }

@@ -10,20 +10,22 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import model.*;
 
-public class ProfileMenu implements ActionListener{ 
-    //belum pakai db
-    String fullName = "Andreas",phoneNum = "08973021998",address = "Bandung",email = "andreas@gmail.com";
-    int point = 100;
+public class ProfileMenu implements ActionListener{
+//    String fullName = "Andreas",phoneNum = "08973021998",address = "Bandung",email = "andreas@gmail.com";
+//    int point = 100;
+    Member member = UserManager.getInstance().getMember();
+    
     //frame
     JFrame proFrame = new JFrame();
     //label
     JLabel labTitle = new JLabel("Profile Menu");
-    JLabel labName = new JLabel("Name: " + fullName);
-    JLabel labPhoneNum = new JLabel("Phone Number: " + phoneNum);
-    JLabel labEmail = new JLabel("Email: " + address);
-    JLabel labAddress = new JLabel("Address: " + email);
-    JLabel labPoint = new JLabel("Poin: " + point);
+    JLabel labName = new JLabel("Name: " + member.getFullName());
+    JLabel labPhoneNum = new JLabel("Phone Number: " + member.getPhoneNum());
+    JLabel labEmail = new JLabel("Email: " + member.getEmail());
+    JLabel labAddress = new JLabel("Address: " + member.getAddress());
+    JLabel labPoint = new JLabel("Poin: " + member.getPoint());
 //    JLabel labBookings = new JLabel("Bookings");(history member)
     //tombol back
     JButton butBack = new JButton("Back");
@@ -42,6 +44,8 @@ public class ProfileMenu implements ActionListener{
         labPoint.setBounds(50, 250, 200, 30);
         
         butBack.setBounds(400, 300, 100, 30);
+        butBack.setActionCommand("Back");
+        butBack.addActionListener(this);
         
         proFrame.add(labTitle);
         proFrame.add(labName);
@@ -55,5 +59,11 @@ public class ProfileMenu implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
+        switch(command){
+            case "Back":
+                proFrame.dispose();
+                new GuestMemberMenu();
+                break;
+        }
     }
 }
