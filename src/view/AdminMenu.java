@@ -14,7 +14,9 @@ import java.awt.event.WindowEvent;
 
 public class AdminMenu implements ActionListener{
     JFrame adminFrame = new JFrame();
-    JLabel labWelcome = new JLabel();
+    JLabel labName = new JLabel();
+    JLabel labCode = new JLabel();
+    JLabel labSalary = new JLabel();
     JButton buttonEdit = new JButton("Edit Jadwal Penerbangan");
     JButton buttonReschedule = new JButton("Reschedule Jadwal Penerbangan");
     JButton buttonHistoryAll = new JButton("Sejarah Transaksi");
@@ -31,10 +33,12 @@ public class AdminMenu implements ActionListener{
         String name = admin.getFullName();
         String code = admin.getKodeAdmin();
         int payroll = admin.getPayroll();
-        labWelcome = new JLabel("Hello, " + name + "!<br>" +
-                                "Your Admin Code : " + code + "<br>" +
-                                "Salary : " + payroll);
-        
+        labName = new JLabel("Hello, " + name);
+        labCode = new JLabel("Your Admin Code : " + code);
+        labSalary = new JLabel("Salary : " + payroll);
+        labName.setBounds(75,50, 200,20);
+        labCode.setBounds(75,80, 200,20);
+        labSalary.setBounds(75,110, 200,20);
         
         buttonEdit.setActionCommand("Edit");
         buttonEdit.addActionListener(this);
@@ -56,18 +60,14 @@ public class AdminMenu implements ActionListener{
         buttonLogout.addActionListener(this);
         buttonLogout.setBounds(100,350, 300,40);
         
+        adminFrame.add(labName);
+        adminFrame.add(labCode);
+        adminFrame.add(labSalary);
         adminFrame.add(buttonEdit);
         adminFrame.add(buttonReschedule);
         adminFrame.add(buttonHistoryAll);
         adminFrame.add(buttonAddVoucher);
         adminFrame.add(buttonLogout);
-        
-        /*JFrame frame = new JFrame();
-        frame.setLayout(new GridLayout());
-        JLabel label = new JLabel("<html>First line<br>Second line</html>");
-        frame.add(label);
-        frame.pack();
-        frame.setVisible(true);*/
     }
     
     @Override
@@ -87,8 +87,12 @@ public class AdminMenu implements ActionListener{
                 adminFrame.dispose();
                 break;
             case "Logout":
-                adminFrame.dispose();
-                JOptionPane.showMessageDialog(adminFrame,"Terima kasih sudah menggunakan!");
+                if (JOptionPane.showConfirmDialog(null, "Apakah anda yakin untuk logout?", "WARNING",
+                        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    adminFrame.dispose();
+                    JOptionPane.showMessageDialog(adminFrame,"Akun telah di-logout.");
+                    new LoginScreen();
+                }
                 break;
         }
     }

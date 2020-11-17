@@ -15,7 +15,7 @@ import java.awt.event.WindowEvent;
 
 public class GuestMemberMenu implements ActionListener{
     JFrame GMFrame = new JFrame();
-    JLabel labWelcome = new JLabel();
+    JLabel labName = new JLabel();
     JButton buttonRegister = new JButton("Register");
     JButton buttonTopUp = new JButton("Top Up");
     JButton buttonProfile = new JButton("Cek Profil");
@@ -34,7 +34,7 @@ public class GuestMemberMenu implements ActionListener{
         GMFrame.setVisible(true);
         
         String name = user.getFullName();
-        labWelcome = new JLabel("Hello, " + name + "!");
+        labName = new JLabel("Hello, " + name + "!");
         
         
         if(user instanceof Member){
@@ -115,8 +115,12 @@ public class GuestMemberMenu implements ActionListener{
                 GMFrame.dispose();
                 break;
             case "Logout":
-                GMFrame.dispose();
-                JOptionPane.showMessageDialog(GMFrame,"Terima kasih sudah menggunakan!");
+                if (JOptionPane.showConfirmDialog(null, "Apakah anda yakin untuk logout?", "WARNING",
+                        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    GMFrame.dispose();
+                    JOptionPane.showMessageDialog(GMFrame,"Akun telah di-logout.");
+                    new LoginScreen();
+                }
                 break;
         }
     }
