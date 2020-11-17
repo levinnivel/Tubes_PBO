@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
 public class AdminMenu implements ActionListener{
+    Admin admin = UserManager.getInstance().getAdmin();
+    
     JFrame adminFrame = new JFrame();
     JLabel labName = new JLabel();
     JLabel labCode = new JLabel();
@@ -23,12 +25,11 @@ public class AdminMenu implements ActionListener{
     JButton buttonAddVoucher = new JButton("Tambah Voucher Tersedia");
     JButton buttonLogout = new JButton("Logout");
     
-    public AdminMenu(Admin admin){
+    public AdminMenu(){
         adminFrame.setSize(500,450);
         adminFrame.setLocationRelativeTo(null);
         adminFrame.setLayout(null);
         adminFrame.setVisible(true);
-        
         
         String name = admin.getFullName();
         String code = admin.getKodeAdmin();
@@ -89,6 +90,7 @@ public class AdminMenu implements ActionListener{
             case "Logout":
                 if (JOptionPane.showConfirmDialog(null, "Apakah anda yakin untuk logout?", "WARNING",
                         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    UserManager.getInstance().setAdmin(null);
                     adminFrame.dispose();
                     JOptionPane.showMessageDialog(adminFrame,"Akun telah di-logout.");
                     new LoginScreen();
