@@ -26,11 +26,12 @@ public class ProfileMenu implements ActionListener{
     JLabel labEmail = new JLabel("Email: " + member.getEmail());
     JLabel labAddress = new JLabel("Address: " + member.getAddress());
     JLabel labPoint = new JLabel("Poin: " + member.getPoint());
+    JLabel labBalance = new JLabel("Balance: " + member.getBalance());
 //    JLabel labBookings = new JLabel("Bookings");(history member)
     //tombol back
     JButton butBack = new JButton("Back");
     public ProfileMenu(){
-        proFrame.setSize(600, 400);
+        proFrame.setSize(600, 450);
         proFrame.setLocationRelativeTo(null);
         proFrame.setLayout(null);
         proFrame.setVisible(true);
@@ -42,8 +43,9 @@ public class ProfileMenu implements ActionListener{
         labEmail.setBounds(50, 150, 150, 30);
         labAddress.setBounds(50, 200, 200, 30);
         labPoint.setBounds(50, 250, 200, 30);
+        labBalance.setBounds(50, 300, 200, 30);
         
-        butBack.setBounds(400, 300, 100, 30);
+        butBack.setBounds(400, 350, 100, 30);
         butBack.setActionCommand("Back");
         butBack.addActionListener(this);
         
@@ -53,6 +55,7 @@ public class ProfileMenu implements ActionListener{
         proFrame.add(labEmail);
         proFrame.add(labAddress);
         proFrame.add(labPoint);
+        proFrame.add(labBalance);
         proFrame.add(butBack);
     }
 

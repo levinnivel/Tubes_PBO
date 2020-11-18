@@ -7,10 +7,6 @@ package model;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author hanschristian
- */
 public class UserManager {
     
     // lazy instantiation

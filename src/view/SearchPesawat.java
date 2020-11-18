@@ -5,10 +5,12 @@
  */
 package view;
 
+import model.*;
 import controller.DateLabelFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Properties;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -43,8 +45,6 @@ public class SearchPesawat implements ActionListener{
     JComboBox cbTipePenerbangan = new JComboBox();
     //button
     JButton butSearch = new JButton("Search");
-    SpinnerModel value = new SpinnerNumberModel(1, 1, 7, 1);
-    JSpinner jmlPenumpang = new JSpinner(value);
     public SearchPesawat(){
         //set frame
         bookingFrame.setSize(600, 400);
@@ -79,10 +79,6 @@ public class SearchPesawat implements ActionListener{
         cbTipePenerbangan = new JComboBox(sTipePenerbangan);
         cbTipePenerbangan.setBounds(300, 180, 100, 30);
         
-        //label tipe jumlah penumpang
-        labJmlPenumpang.setBounds(50, 220, 200, 30);
-        jmlPenumpang.setBounds(300, 220, 50, 30);
-        
         //button cari jadwal
         butSearch.setBounds(400, 300, 100, 30);
         butSearch.addActionListener(this);
@@ -97,8 +93,6 @@ public class SearchPesawat implements ActionListener{
         bookingFrame.add(labTipePenerbangan);
         bookingFrame.add(cbTipePenerbangan);
         bookingFrame.add(datePicker);
-        bookingFrame.add(labJmlPenumpang);
-        bookingFrame.add(jmlPenumpang);
         bookingFrame.add(butSearch);
     }
 
@@ -107,8 +101,13 @@ public class SearchPesawat implements ActionListener{
         String command = e.getActionCommand();
         switch(command){
             case "Search":
+                String valKotaAsal = tfKotaAsal.getText();
+                String valKotaTujuan = tfKotaTujuan.getText();
+                String valTglBerangkat = model.getDay() + "-" + model.getMonth() + "-" + model.getYear();
+                String valTipe = cbTipePenerbangan.getSelectedItem().toString();;
+                
                 bookingFrame.dispose();
-                new ChooseSchedule();
+                new ChooseSchedule(valKotaAsal, valKotaTujuan, valTglBerangkat, valTipe);
                 break;
         }
     }
