@@ -10,15 +10,17 @@ import java.util.ArrayList;
 public class Member extends User{
     private String address;
     private int point;
+    private int balance;
     ArrayList<Booking> bookings = new ArrayList<Booking>();
     
     public Member(){
     }
 
-    public Member(String email, String fullName, String password, String phoneNum, String address, int point, ArrayList<Booking> bookings) {
+    public Member(String email, String fullName, String password, String phoneNum, String address, int point, int balance, ArrayList<Booking> bookings) {
         super(email, fullName, password, phoneNum);
         this.address = address;
         this.point = point;
+        this.balance = balance;
         this.bookings = bookings;
     }
 
@@ -38,6 +40,14 @@ public class Member extends User{
         this.point = point;
     }
 
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+    
     public ArrayList<Booking> getBookings() {
         return bookings;
     }

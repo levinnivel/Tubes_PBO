@@ -118,6 +118,7 @@ public class LoginScreen implements ActionListener{
                             logMember.setPhoneNum(rs.getString("phoneNumMember"));
                             logMember.setAddress(rs.getString("addressMember"));
                             logMember.setPoint(rs.getInt("poinMember"));
+                            logMember.setBalance(rs.getInt("balance"));
                             
                             UserManager.getInstance().setMember(logMember);
                             loginFrame.dispose();

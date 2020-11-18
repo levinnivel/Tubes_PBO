@@ -22,7 +22,6 @@ public class AdminMenu implements ActionListener{
     JButton buttonEdit = new JButton("Edit Jadwal Penerbangan");
     JButton buttonReschedule = new JButton("Reschedule Jadwal Penerbangan");
     JButton buttonHistoryAll = new JButton("Sejarah Transaksi");
-    JButton buttonAddVoucher = new JButton("Tambah Voucher Tersedia");
     JButton buttonLogout = new JButton("Logout");
     
     public AdminMenu(){
@@ -53,10 +52,6 @@ public class AdminMenu implements ActionListener{
         buttonHistoryAll.addActionListener(this);
         buttonHistoryAll.setBounds(100,250, 300,40);
         
-        buttonAddVoucher.setActionCommand("Add Voucher");
-        buttonAddVoucher.addActionListener(this);
-        buttonAddVoucher.setBounds(100,300, 300,40);
-        
         buttonLogout.setActionCommand("Logout");
         buttonLogout.addActionListener(this);
         buttonLogout.setBounds(100,350, 300,40);
@@ -67,7 +62,6 @@ public class AdminMenu implements ActionListener{
         adminFrame.add(buttonEdit);
         adminFrame.add(buttonReschedule);
         adminFrame.add(buttonHistoryAll);
-        adminFrame.add(buttonAddVoucher);
         adminFrame.add(buttonLogout);
     }
     
@@ -82,9 +76,6 @@ public class AdminMenu implements ActionListener{
                 adminFrame.dispose();
                 break;
             case "History All":
-                adminFrame.dispose();
-                break;
-            case "Add Voucher":
                 adminFrame.dispose();
                 break;
             case "Logout":

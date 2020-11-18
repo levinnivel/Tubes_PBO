@@ -25,19 +25,18 @@ public class GuestMemberMenu implements ActionListener{
     JButton buttonProfile = new JButton("Cek Profil");
     JButton buttonBookTicket = new JButton("Book Tiket Penerbangan");
     JButton buttonPayment = new JButton("Pembayaran");
-    JButton buttonHistoryBook = new JButton("Cek Sejarah Booking");
-    JButton buttonExchange = new JButton("Tukar Voucher");
     JButton buttonRefund = new JButton("Refund Booking");
-    JButton buttonRescheduleBook = new JButton("Reschedule Booking");
     JButton buttonLogout = new JButton("Logout");
     
     public GuestMemberMenu(){
-        GMFrame.setSize(500,600);
+        GMFrame.setSize(500,500);
         GMFrame.setLocationRelativeTo(null);
         GMFrame.setLayout(null);
         GMFrame.setVisible(true);
         
         if(user == null){
+            Booking book = BookingManager.getInstance().getBooking();
+            
             String name = member.getFullName();
             labName = new JLabel("Hello, " + name + "!");
             buttonProfile.setActionCommand("Profile");
@@ -65,29 +64,19 @@ public class GuestMemberMenu implements ActionListener{
         buttonPayment.addActionListener(this);
         buttonPayment.setBounds(100,300, 300,40);
         
-        buttonExchange.setActionCommand("Exchange");
-        buttonExchange.addActionListener(this);
-        buttonExchange.setBounds(100,350, 300,40);
-        
         buttonRefund.setActionCommand("Refund");
         buttonRefund.addActionListener(this);
-        buttonRefund.setBounds(100,400, 300,40);
-        
-        buttonRescheduleBook.setActionCommand("Reschedule Book");
-        buttonRescheduleBook.addActionListener(this);
-        buttonRescheduleBook.setBounds(100,450, 300,40);
+        buttonRefund.setBounds(100,350, 300,40);
         
         buttonLogout.setActionCommand("Logout");
         buttonLogout.addActionListener(this);
-        buttonLogout.setBounds(100,500, 300,40);
+        buttonLogout.setBounds(100,400, 300,40);
         
         GMFrame.add(labName);
         GMFrame.add(buttonTopUp);
         GMFrame.add(buttonBookTicket);
         GMFrame.add(buttonPayment);
-        GMFrame.add(buttonExchange);
         GMFrame.add(buttonRefund);
-        GMFrame.add(buttonRescheduleBook);
         GMFrame.add(buttonLogout);
     }
     
@@ -105,20 +94,17 @@ public class GuestMemberMenu implements ActionListener{
                 break;
             case "Top Up":
                 GMFrame.dispose();
+                new TopUp();
                 break;
             case "Book Ticket":
                 GMFrame.dispose();
+                new SearchPesawat();
                 break;
             case "Payment":
                 GMFrame.dispose();
-                break;
-            case "Exchange":
-                GMFrame.dispose();
+                new Payment();
                 break;
             case "Refund":
-                GMFrame.dispose();
-                break;
-            case "Reschedule Book":
                 GMFrame.dispose();
                 break;
             case "Logout":
@@ -126,6 +112,7 @@ public class GuestMemberMenu implements ActionListener{
                         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     GMFrame.dispose();
                     UserManager.getInstance().setMember(null);
+                    UserManager.getInstance().setUser(null);
                     JOptionPane.showMessageDialog(GMFrame,"Akun telah di-logout.");
                     new LoginScreen();
                 }

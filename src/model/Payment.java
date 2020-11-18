@@ -7,13 +7,15 @@ package model;
 
 public class Payment {
     private String paymentType;
+    private int amount;
     
     public Payment(){
         
     }
 
-    public Payment(String paymentType) {
+    public Payment(String paymentType, int amount) {
         this.paymentType = paymentType;
+        this.amount = amount;
     }
 
     public String getPaymentType() {
@@ -22,6 +24,14 @@ public class Payment {
 
     public void setPaymentType(String paymentType) {
         this.paymentType = paymentType;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
     
     public void paymentByTransfer(){

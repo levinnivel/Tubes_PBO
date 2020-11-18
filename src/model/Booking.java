@@ -5,23 +5,26 @@
  */
 package model;
 
+import static model.ActiveEnum.*;
 import java.util.ArrayList;
 
 public class Booking {
     private String idBooking;
     private String dateBooking;
     private int totalPrice;
-    private JadwalPesawat schedule;
-    ArrayList<Passenger> passenger = new ArrayList<Passenger>();
+    private JadwalPesawat schedule = null;
+    private ArrayList<Passenger> passenger = new ArrayList();
+//    private ActiveEnum isActive = INACTIVE;
     
     public Booking(){
         
     }
     
-    public Booking(String idBooking, String dateBooking, int totalPrice) {
+    public Booking(String idBooking, String dateBooking, int totalPrice, JadwalPesawat schedule) {
         this.idBooking = idBooking;
         this.dateBooking = dateBooking;
         this.totalPrice = totalPrice;
+        this.schedule = schedule;
     }
 
     public String getIdBooking() {
@@ -48,5 +51,25 @@ public class Booking {
         this.totalPrice = totalPrice;
     }
     
+    public void insertSchedule(JadwalPesawat schedule){
+//        this.isActive = ACTIVE;
+        this.schedule = schedule;
+    }
+
+    public JadwalPesawat getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(JadwalPesawat schedule) {
+        this.schedule = schedule;
+    }
+
+    public ArrayList<Passenger> getPassenger() {
+        return passenger;
+    }
+
+    public void setPassenger(ArrayList<Passenger> passenger) {
+        this.passenger = passenger;
+    }
     
 }
