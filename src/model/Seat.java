@@ -5,17 +5,18 @@
  */
 package model;
 
+import static model.ActiveEnum.*;
+
 public class Seat {
     private int seatNum;
-    private boolean status;
+    private ActiveEnum isActive = ACTIVE;
     
     public Seat(){
         
     }
 
-    public Seat(int seatNum, boolean status) {
+    public Seat(int seatNum) {
         this.seatNum = seatNum;
-        this.status = status;
     }
 
     public int getSeatNum() {
@@ -25,14 +26,8 @@ public class Seat {
     public void setSeatNum(int seatNum) {
         this.seatNum = seatNum;
     }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
     
-    
+    public void insertPassenger(){
+        this.isActive = INACTIVE;
+    }
 }

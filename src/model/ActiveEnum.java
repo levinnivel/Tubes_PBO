@@ -6,5 +6,5 @@
 package model;
 
 public enum ActiveEnum {
-    ACTIVE, INACTIVE;
+    INACTIVE, ACTIVE;
 }

@@ -5,14 +5,21 @@
  */
 package view;
 
+import static model.ActiveEnum.*;
+import view.MemberMenu1.*;
+import view.MemberMenu2.*;
+import view.MemberMenu3.*;
+import view.MemberMenu4.*;
+import view.MemberMenu5.*;
+import view.GuestMenu.*;
 import model.*;
+import controller.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import view.GuestMenu.*;
 
 public class GuestMemberMenu implements ActionListener{
     User user = UserManager.getInstance().getUser();
@@ -20,12 +27,15 @@ public class GuestMemberMenu implements ActionListener{
     
     JFrame GMFrame = new JFrame();
     JLabel labName = new JLabel();
+    JLabel labCartDesc = new JLabel("Your Cart : ");
+    JLabel labIDBook = new JLabel();
+    JLabel labTotalPrice = new JLabel();
     JButton buttonRegister = new JButton("Register");
     JButton buttonTopUp = new JButton("Top Up");
     JButton buttonProfile = new JButton("Cek Profil");
     JButton buttonBookTicket = new JButton("Book Tiket Penerbangan");
     JButton buttonPayment = new JButton("Pembayaran");
-    JButton buttonRefund = new JButton("Refund Booking");
+    JButton buttonRefund = new JButton("Cancel Booking");
     JButton buttonLogout = new JButton("Logout");
     
     public GuestMemberMenu(){
@@ -35,10 +45,23 @@ public class GuestMemberMenu implements ActionListener{
         GMFrame.setVisible(true);
         
         if(user == null){
-            Booking book = BookingManager.getInstance().getBooking();
-            
+            Booking book = Controller.getFromDB(member.getEmail());
+            BookingManager.getInstance().setBooking(book);
+//            Booking book = BookingManager.getInstance().getBooking();
             String name = member.getFullName();
+            
             labName = new JLabel("Hello, " + name + "!");
+            if(book.isActive()==ACTIVE){
+                String idBook = book.getIdBooking();
+                int priceBook = book.getTotalPrice();
+                labIDBook = new JLabel("ID Booking : " + idBook);
+                labTotalPrice = new JLabel("Total Price : " + priceBook);
+                labIDBook.setBounds(75,100, 200,20);
+                labTotalPrice.setBounds(75,125, 200,20);
+                GMFrame.add(labIDBook);
+                GMFrame.add(labTotalPrice);
+            }
+            
             buttonProfile.setActionCommand("Profile");
             buttonProfile.addActionListener(this);
             buttonProfile.setBounds(100,150, 300,40);
@@ -50,7 +73,9 @@ public class GuestMemberMenu implements ActionListener{
             buttonRegister.setBounds(100,150, 300,40);
             GMFrame.add(buttonRegister);
         }
+        
         labName.setBounds(75,50, 200,20);
+        labCartDesc.setBounds(75,75, 200,20);
         
         buttonTopUp.setActionCommand("Top Up");
         buttonTopUp.addActionListener(this);
@@ -73,6 +98,7 @@ public class GuestMemberMenu implements ActionListener{
         buttonLogout.setBounds(100,400, 300,40);
         
         GMFrame.add(labName);
+        GMFrame.add(labCartDesc);
         GMFrame.add(buttonTopUp);
         GMFrame.add(buttonBookTicket);
         GMFrame.add(buttonPayment);
@@ -102,10 +128,11 @@ public class GuestMemberMenu implements ActionListener{
                 break;
             case "Payment":
                 GMFrame.dispose();
-                new Payment();
+                new PaymentScreen();
                 break;
             case "Refund":
                 GMFrame.dispose();
+                new RefundScreen();
                 break;
             case "Logout":
                 if (JOptionPane.showConfirmDialog(null, "Apakah anda yakin untuk logout?", "WARNING",

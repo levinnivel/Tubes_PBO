@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package view.MemberMenu3;
 
 import controller.Controller;
 import javax.swing.*;
@@ -50,7 +50,7 @@ public class ChooseSchedule implements ActionListener{
         
         conn.connect();
         String query = "SELECT a.idJadwal, b.idPesawat,c.destinasiAsal, c.destinasiAkhir, "
-                + "a.jamKeberangkatan, a.jamKedatagan, a.dateKeberangkatan, a.dateKedatangan, "
+                + "a.jamKeberangkatan, a.jamKedatangan, a.dateKeberangkatan, a.dateKedatangan, "
                 + "b.tipePesawat, b.hargaKursi, b.kapasitasBagasi, b.hargaBagasiPerKg "
                 + "FROM jadwal a JOIN pesawat b ON a.idPesawat=b.idPesawat JOIN rute c ON a.idRute=c.idRute "
                 + "WHERE c.destinasiAsal='" + kotaAsal + "' AND c.destinasiAkhir='" + kotaTujuan +"' AND b.tipePesawat='" + tipe + "'";
@@ -72,6 +72,8 @@ public class ChooseSchedule implements ActionListener{
         scheduleFrame.add(chscTitle);
         scheduleFrame.add(sp);
         scheduleFrame.add(submit);
+        
+        conn.disconnect();
     }
 
     @Override

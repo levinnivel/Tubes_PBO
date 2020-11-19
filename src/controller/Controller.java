@@ -46,8 +46,31 @@ public class Controller {
         }
         data.add(vector);
     }
+    conn.disconnect();
 
     return new DefaultTableModel(data, columnNames);
 
     }
+    
+    public static Booking getFromDB(String email){
+        conn.connect();
+        
+        String query = "SELECT idBooking, totalPrice, dateBooking, statusBayar FROM booking WHERE emailMember='" + email + "'";
+        Booking booking = new Booking();
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                booking.setIdBooking(rs.getString("idBooking"));
+                booking.setTotalPrice(rs.getInt("totalPrice"));
+                booking.setDateBooking(rs.getString("dateBooking"));
+                booking.setIsActive(ActiveEnum.valueOf(rs.getString("statusBayar")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return booking;
+    }
+    
 }
