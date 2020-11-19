@@ -8,6 +8,10 @@ package view;
 import model.*;
 import javax.swing.*;
 import java.awt.*;
+import static model.ActiveEnum.*;
+import view.AdminMenu1.*;
+import view.AdminMenu2.*;
+import view.AdminMenu3.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -77,6 +81,7 @@ public class AdminMenu implements ActionListener{
                 break;
             case "History All":
                 adminFrame.dispose();
+                new HistoryMainScreen();
                 break;
             case "Logout":
                 if (JOptionPane.showConfirmDialog(null, "Apakah anda yakin untuk logout?", "WARNING",

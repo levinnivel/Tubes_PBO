@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package view.MemberMenu2;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;  
 import java.util.Calendar;  
 import model.*;
+import view.GuestMemberMenu;
 
 public class TopUp implements ActionListener {
     static DatabaseHandler conn = new DatabaseHandler();
@@ -27,7 +28,6 @@ public class TopUp implements ActionListener {
     JFrame topUpFrame = new JFrame();
     
     JLabel labTitle = new JLabel("Top-up Menu!");
-    JLabel labCredit = new JLabel("give us ur money plz");
     JLabel labPayMeth = new JLabel("Payment Method  : ");
     JLabel labTopAmount = new JLabel("Amount                   : ");
     JTextField tfTopAmount = new JTextField();
@@ -38,7 +38,7 @@ public class TopUp implements ActionListener {
     JRadioButton rmethod5 = new JRadioButton("Indomaret");
     ButtonGroup methodTypes = new ButtonGroup();
     JButton buttonTopUp = new JButton("Top-Up"); //Login by inserting username and password
-    JButton buttonExit = new JButton("Exit");
+    JButton buttonBack = new JButton("Back");
     
     public TopUp(){
         topUpFrame.setSize(500,350);
@@ -46,8 +46,7 @@ public class TopUp implements ActionListener {
         topUpFrame.setLayout(null);
         topUpFrame.setVisible(true);
         
-        labTitle.setBounds(250,30, 200,20);
-        labCredit.setBounds(160,50, 200,20);
+        labTitle.setBounds(150,30, 200,20);
         
         labPayMeth.setBounds(50,100, 150,30);
         labTopAmount.setBounds(50,180, 150,30);
@@ -68,12 +67,11 @@ public class TopUp implements ActionListener {
         buttonTopUp.setActionCommand("Top-Up");
         buttonTopUp.addActionListener(this);
         
-        buttonExit.setBounds(215,270, 100,25);
-        buttonExit.setActionCommand("Exit");
-        buttonExit.addActionListener(this);
+        buttonBack.setBounds(215,270, 100,25);
+        buttonBack.setActionCommand("Back");
+        buttonBack.addActionListener(this);
         
         topUpFrame.add(labTitle);
-        topUpFrame.add(labCredit);
         topUpFrame.add(labPayMeth);
         topUpFrame.add(labTopAmount);
         topUpFrame.add(rmethod1);
@@ -83,7 +81,7 @@ public class TopUp implements ActionListener {
         topUpFrame.add(rmethod5);
         topUpFrame.add(tfTopAmount);
         topUpFrame.add(buttonTopUp);
-        topUpFrame.add(buttonExit);
+        topUpFrame.add(buttonBack);
 
     }
     
@@ -95,18 +93,23 @@ public class TopUp implements ActionListener {
                 conn.connect();
                 
                 int topUpAmount = Integer.parseInt(tfTopAmount.getText());
+                int topUpPoint = 0;
                 
                 String valMethod = "";
                 if(rmethod1.isSelected()){
                     valMethod = "Transfer ATM";
                 }else if (rmethod2.isSelected()){
                     valMethod = "OVO";
+                    topUpPoint = topUpAmount/10;
                 }else if (rmethod3.isSelected()){
                     valMethod = "GO-PAY";
+                    topUpPoint = topUpAmount/20;
                 }else if (rmethod4.isSelected()){
                     valMethod = "Alfamart";
+                    topUpPoint = topUpAmount/5;
                 }else if (rmethod5.isSelected()){
                     valMethod = "Indomaret";
+                    topUpPoint = topUpAmount/15;
                 }
                 
                 Date date = Calendar.getInstance().getTime();  
@@ -129,24 +132,28 @@ public class TopUp implements ActionListener {
                 }
                 
                 int newAmount = member.getBalance() + topUpAmount;
-                System.out.println(member.getBalance());
-                String query2 = "UPDATE member SET balance='" + newAmount + "' WHERE emailMember='" + member.getEmail() + "'";
+                int newPoint = member.getPoint() + topUpPoint;
+                
+                String query2 = "UPDATE member SET balance='" + newAmount + "', "
+                        + "poinMember='" + newPoint + "' "
+                        + "WHERE emailMember='" + member.getEmail() + "'";
                 try {
                     Statement stmt = conn.con.createStatement();
                     stmt.executeUpdate(query2);
                     member.setBalance(newAmount);
+                    member.setPoint(newPoint);
                     JOptionPane.showMessageDialog(topUpFrame,"Balance berhasil diperbaharui!");
+                    JOptionPane.showMessageDialog(topUpFrame,"Anda mendapatkan poin sebesar " +topUpPoint + "!");
                 } catch (SQLException excUp) {
                     excUp.printStackTrace();
                     JOptionPane.showMessageDialog(topUpFrame, "Balance gagal diperbaharui!", "Register Error",JOptionPane.WARNING_MESSAGE);
-
                 }
                 
+                conn.disconnect();
                 topUpFrame.dispose();
-                System.out.println(member.getBalance());
                 new GuestMemberMenu();
                 break;
-            case "Exit":
+            case "Back":
                 topUpFrame.dispose();
                 new GuestMemberMenu();
                 break;

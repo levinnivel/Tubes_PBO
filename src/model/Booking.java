@@ -14,7 +14,7 @@ public class Booking {
     private int totalPrice;
     private JadwalPesawat schedule = null;
     private ArrayList<Passenger> passenger = new ArrayList();
-//    private ActiveEnum isActive = INACTIVE;
+    private ActiveEnum isActive;
     
     public Booking(){
         
@@ -52,7 +52,7 @@ public class Booking {
     }
     
     public void insertSchedule(JadwalPesawat schedule){
-//        this.isActive = ACTIVE;
+        this.isActive = ACTIVE;
         this.schedule = schedule;
     }
 
@@ -70,6 +70,18 @@ public class Booking {
 
     public void setPassenger(ArrayList<Passenger> passenger) {
         this.passenger = passenger;
+    }
+
+    public ActiveEnum isActive() {
+        return isActive;
+    }
+
+    public void setIsActive(ActiveEnum isActive) {
+        this.isActive = isActive;
+    }
+    
+    public void setIsInactive(ActiveEnum isActive) {
+        this.isActive = INACTIVE;
     }
     
 }

@@ -121,6 +121,9 @@ public class LoginScreen implements ActionListener{
                             logMember.setBalance(rs.getInt("balance"));
                             
                             UserManager.getInstance().setMember(logMember);
+                            
+                            conn.disconnect();
+                            
                             loginFrame.dispose();
                             JOptionPane.showMessageDialog(loginFrame,"Selamat datang " + logMember.getFullName() + "!");
                             new GuestMemberMenu();

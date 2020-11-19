@@ -6,6 +6,7 @@
 package model;
 
 public class JadwalPesawat {
+    private String idJadwal;
     private String dateKeberangkatan;
     private String dateKedatangan;
     private String jamKedatangan;
@@ -17,7 +18,8 @@ public class JadwalPesawat {
         
     }
 
-    public JadwalPesawat(String dateKeberangkatan, String dateKedatangan, String jamKedatangan, String jamKeberangkatan, Pesawat pesawat, Rute rute) {
+    public JadwalPesawat(String idJadwal, String dateKeberangkatan, String dateKedatangan, String jamKedatangan, String jamKeberangkatan, Pesawat pesawat, Rute rute) {
+        this.idJadwal = idJadwal;
         this.dateKeberangkatan = dateKeberangkatan;
         this.dateKedatangan = dateKedatangan;
         this.jamKedatangan = jamKedatangan;
@@ -26,6 +28,14 @@ public class JadwalPesawat {
         this.rute = rute;
     }
 
+    public String getIdJadwal() {
+        return idJadwal;
+    }
+
+    public void setIdJadwal(String idJadwal) {
+        this.idJadwal = idJadwal;
+    }
+    
     public String getDateKeberangkatan() {
         return dateKeberangkatan;
     }

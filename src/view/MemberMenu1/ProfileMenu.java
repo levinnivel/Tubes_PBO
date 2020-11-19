@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package view.MemberMenu1;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import model.*;
+import view.GuestMemberMenu;
 
 public class ProfileMenu implements ActionListener{
 //    String fullName = "Andreas",phoneNum = "08973021998",address = "Bandung",email = "andreas@gmail.com";

@@ -6,6 +6,7 @@
 package model;
 
 public class Rute {
+    private String idRute;
     private String destinasiAsal;
     private String destinasiTujuan;
     
