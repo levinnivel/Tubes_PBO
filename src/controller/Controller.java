@@ -52,10 +52,10 @@ public class Controller {
 
     }
     
-    public static Booking getFromDB(String email){
+    public static Booking getFromDBTest(String email){
         conn.connect();
         
-        String query = "SELECT idBooking, totalPrice, dateBooking, statusBayar FROM booking WHERE emailMember='" + email + "'";
+        String query = "SELECT idBooking, totalPrice, dateBooking, statusBayar, statusTransaksi FROM booking WHERE emailMember='" + email + "'";
         Booking booking = new Booking();
         try {
             Statement stmt = conn.con.createStatement();
@@ -64,7 +64,8 @@ public class Controller {
                 booking.setIdBooking(rs.getString("idBooking"));
                 booking.setTotalPrice(rs.getInt("totalPrice"));
                 booking.setDateBooking(rs.getString("dateBooking"));
-                booking.setIsActive(ActiveEnum.valueOf(rs.getString("statusBayar")));
+                booking.setIsPaid(PaidEnum.valueOf(rs.getString("statusBayar")));
+                booking.setIsActive(ActiveEnum.valueOf(rs.getString("statusTransaksi")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -73,4 +74,42 @@ public class Controller {
         return booking;
     }
     
+    public static ArrayList<String> getListIDSchedules(){
+        ArrayList<String> IDs = new ArrayList();
+        conn.connect();
+        String query = "SELECT idJadwal FROM jadwal";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
+            while (rs.next()) {
+                IDs.add(rs.getString("idJadwal"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (IDs);
+    }
+    
+    public static int getLastIDBooking(){
+        String ID = "";
+        conn.connect();
+        String query = "SELECT idBooking FROM booking WHERE idBooking=(SELECT max(idBooking) FROM booking)";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
+            while (rs.next()) {
+                ID = rs.getString("idBooking");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        int endIdx = ID.length() + 1;
+        int countID = Integer.parseInt(ID.substring(2,endIdx));
+        
+        conn.disconnect();
+        return (countID);
+    }
 }

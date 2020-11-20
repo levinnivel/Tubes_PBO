@@ -142,11 +142,11 @@ public class TopUp implements ActionListener {
                     stmt.executeUpdate(query2);
                     member.setBalance(newAmount);
                     member.setPoint(newPoint);
-                    JOptionPane.showMessageDialog(topUpFrame,"Balance berhasil diperbaharui!");
+                    JOptionPane.showMessageDialog(topUpFrame,"Saldo berhasil diperbaharui!");
                     JOptionPane.showMessageDialog(topUpFrame,"Anda mendapatkan poin sebesar " +topUpPoint + "!");
                 } catch (SQLException excUp) {
                     excUp.printStackTrace();
-                    JOptionPane.showMessageDialog(topUpFrame, "Balance gagal diperbaharui!", "Register Error",JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(topUpFrame, "Saldo gagal diperbaharui!", "Register Error",JOptionPane.WARNING_MESSAGE);
                 }
                 
                 conn.disconnect();

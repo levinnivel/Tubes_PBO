@@ -55,7 +55,7 @@ public class HistoryMainScreen implements ActionListener{
         historyFrame.setVisible(true);
         
         conn.connect();
-        String query = "SELECT * from booking WHERE statusTransaksi='ACTIVE'";
+        String query = "SELECT * from booking";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -69,6 +69,7 @@ public class HistoryMainScreen implements ActionListener{
         sp.setBounds(30, 90, 1230, 300);
         
         buttonBack.setBounds(1100, 400, 100, 30);
+        buttonBack.setActionCommand("Back");
         buttonBack.addActionListener(this);
         
         historyFrame.add(labTitle);

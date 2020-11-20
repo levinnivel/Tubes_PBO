@@ -6,6 +6,7 @@
 package view.MemberMenu4;
 
 import static model.ActiveEnum.*;
+import static model.PaidEnum.*;
 import view.*;
 import view.MemberMenu1.*;
 import view.MemberMenu2.*;
@@ -247,10 +248,10 @@ public class PaymentScreen implements ActionListener{
                             Statement stmt = conn.con.createStatement();
                             stmt.executeUpdate(query);
                             member.setBalance(amountPaid);
-                            JOptionPane.showMessageDialog(payFrame,"Balance berhasil diperbaharui!");
+                            JOptionPane.showMessageDialog(payFrame,"Saldo berhasil diperbaharui!");
                         } catch (SQLException excUp) {
                             excUp.printStackTrace();
-                            JOptionPane.showMessageDialog(payFrame, "Balance gagal diperbaharui!", "Payment Error",JOptionPane.WARNING_MESSAGE);
+                            JOptionPane.showMessageDialog(payFrame, "Saldo gagal diperbaharui!", "Payment Error",JOptionPane.WARNING_MESSAGE);
                         }
                     }else{
                         String query = "UPDATE member SET poinMember='" + member.getPoint() + "', "
@@ -265,13 +266,13 @@ public class PaymentScreen implements ActionListener{
                         }
                     }
                     
-                    String query = "UPDATE booking SET statusBayar='INACTIVE' "
+                    String query = "UPDATE booking SET statusBayar='LUNAS' "
                         + "WHERE emailMember='" + member.getEmail() + "' "
                         + "AND dateBooking='" + booking.getDateBooking() + "'";
                     try {
                         Statement stmt = conn.con.createStatement();
                         stmt.executeUpdate(query);
-                        booking.setIsInactive(INACTIVE);
+                        booking.setIsPaid(LUNAS);
                         JOptionPane.showMessageDialog(payFrame,"Pembayaran berhasil!");
                     } catch (SQLException excUp) {
                         excUp.printStackTrace();

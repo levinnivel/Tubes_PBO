@@ -6,6 +6,7 @@
 package model;
 
 import static model.ActiveEnum.*;
+import static model.PaidEnum.*;
 import java.util.ArrayList;
 
 public class Booking {
@@ -14,6 +15,7 @@ public class Booking {
     private int totalPrice;
     private JadwalPesawat schedule = null;
     private ArrayList<Passenger> passenger = new ArrayList();
+    private PaidEnum isPaid;
     private ActiveEnum isActive;
     
     public Booking(){
@@ -72,6 +74,14 @@ public class Booking {
         this.passenger = passenger;
     }
 
+    public PaidEnum isPaid() {
+        return isPaid;
+    }
+
+    public void setIsPaid(PaidEnum isPaid) {
+        this.isPaid = isPaid;
+    }
+    
     public ActiveEnum isActive() {
         return isActive;
     }
@@ -80,7 +90,7 @@ public class Booking {
         this.isActive = isActive;
     }
     
-    public void setIsInactive(ActiveEnum isActive) {
+    public void deactivateTransaction() {
         this.isActive = INACTIVE;
     }
     

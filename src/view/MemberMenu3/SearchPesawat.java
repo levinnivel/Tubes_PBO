@@ -6,6 +6,7 @@
 package view.MemberMenu3;
 
 import model.*;
+import view.*;
 import controller.DateLabelFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,7 +42,9 @@ public class SearchPesawat implements ActionListener{
     //combo box
     JComboBox cbTipePenerbangan = new JComboBox();
     //button
-    JButton butSearch = new JButton("Search");
+    JButton buttonSearch = new JButton("Search");
+    JButton buttonBack = new JButton("Search");
+    
     public SearchPesawat(){
         //set frame
         bookingFrame.setSize(600, 400);
@@ -77,8 +80,13 @@ public class SearchPesawat implements ActionListener{
         cbTipePenerbangan.setBounds(300, 180, 100, 30);
         
         //button cari jadwal
-        butSearch.setBounds(400, 300, 100, 30);
-        butSearch.addActionListener(this);
+        buttonSearch.setBounds(400, 300, 100, 30);
+        buttonSearch.setActionCommand("Search");
+        buttonSearch.addActionListener(this);
+        
+        buttonBack.setBounds(200, 300, 100, 30);
+        buttonBack.setActionCommand("Back");
+        buttonBack.addActionListener(this);
         
         //add to frame
         bookingFrame.add(labTitle);
@@ -90,7 +98,8 @@ public class SearchPesawat implements ActionListener{
         bookingFrame.add(labTipePenerbangan);
         bookingFrame.add(cbTipePenerbangan);
         bookingFrame.add(datePicker);
-        bookingFrame.add(butSearch);
+        bookingFrame.add(buttonSearch);
+        bookingFrame.add(buttonBack);
     }
 
     @Override
@@ -106,6 +115,9 @@ public class SearchPesawat implements ActionListener{
                 bookingFrame.dispose();
                 new ChooseSchedule(valKotaAsal, valKotaTujuan, valTglBerangkat, valTipe);
                 break;
+            case "Back":
+                bookingFrame.dispose();
+                new GuestMemberMenu();
         }
     }
 }

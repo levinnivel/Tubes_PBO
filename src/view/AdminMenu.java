@@ -75,9 +75,11 @@ public class AdminMenu implements ActionListener{
         switch(command){
             case "Edit":
                 adminFrame.dispose();
+                new EditScheduleMainScreen();
                 break;
             case "Reschedule":
                 adminFrame.dispose();
+                new RescheduleMainScreen();
                 break;
             case "History All":
                 adminFrame.dispose();
