@@ -38,10 +38,9 @@ public class RegisterScreen implements ActionListener{
     JTextField tfAddress = new JTextField();
     
     JButton buttonReg = new JButton("Register Now");
+    JButton buttonBack = new JButton("Back");
     
     public RegisterScreen(){
-        UserManager.getInstance().setUser(null);
-        
         regFrame.setSize(600,350);
         regFrame.setLocationRelativeTo(null);
         regFrame.setLayout(null);
@@ -64,6 +63,10 @@ public class RegisterScreen implements ActionListener{
         buttonReg.setActionCommand("Register");
         buttonReg.addActionListener(this);
         
+        buttonBack.setBounds(50,250, 100,20);
+        buttonBack.setActionCommand("Back");
+        buttonBack.addActionListener(this);
+        
         regFrame.add(labTitle);
         regFrame.add(labFullName);
         regFrame.add(labEmail);
@@ -76,6 +79,7 @@ public class RegisterScreen implements ActionListener{
         regFrame.add(tfPhone);
         regFrame.add(tfAddress);
         regFrame.add(buttonReg);
+        regFrame.add(buttonBack);
     }
     
     @Override
@@ -84,6 +88,7 @@ public class RegisterScreen implements ActionListener{
         switch(command){
             case "Register":
                 conn.connect();
+                UserManager.getInstance().setUser(null);
                 Member newMember = new Member();
                 newMember.setFullName(tfFullName.getText());
                 newMember.setEmail(tfEmail.getText());
@@ -109,7 +114,13 @@ public class RegisterScreen implements ActionListener{
                     excIns.printStackTrace();
                     JOptionPane.showMessageDialog(regFrame, "Email sudah pernah terdaftar!", "Register Error",JOptionPane.WARNING_MESSAGE);
                 }
-            break;
+                
+                conn.disconnect();
+                break;
+            case "Back":
+                regFrame.dispose();
+                new GuestMemberMenu();
+                break;
         }
     }
 }

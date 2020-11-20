@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.AdminMenu1;
+package model;
 
-public class DeleteSchedule {
-    
+public enum PaidEnum {
+    BELUM_LUNAS, LUNAS;
 }

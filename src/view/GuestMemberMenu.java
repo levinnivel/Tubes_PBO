@@ -6,6 +6,7 @@
 package view;
 
 import static model.ActiveEnum.*;
+import static model.PaidEnum.*;
 import view.MemberMenu1.*;
 import view.MemberMenu2.*;
 import view.MemberMenu3.*;
@@ -35,7 +36,7 @@ public class GuestMemberMenu implements ActionListener{
     JButton buttonProfile = new JButton("Cek Profil");
     JButton buttonBookTicket = new JButton("Book Tiket Penerbangan");
     JButton buttonPayment = new JButton("Pembayaran");
-    JButton buttonRefund = new JButton("Cancel Booking");
+    JButton buttonRefund = new JButton("Refund or Cancel Booking");
     JButton buttonLogout = new JButton("Logout");
     
     public GuestMemberMenu(){
@@ -45,13 +46,13 @@ public class GuestMemberMenu implements ActionListener{
         GMFrame.setVisible(true);
         
         if(user == null){
-            Booking book = Controller.getFromDB(member.getEmail());
+            Booking book = Controller.getFromDBTest(member.getEmail());
             BookingManager.getInstance().setBooking(book);
 //            Booking book = BookingManager.getInstance().getBooking();
             String name = member.getFullName();
             
             labName = new JLabel("Hello, " + name + "!");
-            if(book.isActive()==ACTIVE){
+            if(book.isPaid()==BELUM_LUNAS){
                 String idBook = book.getIdBooking();
                 int priceBook = book.getTotalPrice();
                 labIDBook = new JLabel("ID Booking : " + idBook);
@@ -119,20 +120,44 @@ public class GuestMemberMenu implements ActionListener{
                 new RegisterScreen();
                 break;
             case "Top Up":
-                GMFrame.dispose();
-                new TopUp();
+                if(user!=null){
+                    JOptionPane.showMessageDialog(GMFrame, "Register terlebih dahulu!", "Menu Error",JOptionPane.WARNING_MESSAGE);
+                    GMFrame.dispose();
+                    new RegisterScreen();
+                }else{
+                    GMFrame.dispose();
+                    new TopUp();
+                }
                 break;
             case "Book Ticket":
-                GMFrame.dispose();
-                new SearchPesawat();
+                if(user!=null){
+                    JOptionPane.showMessageDialog(GMFrame, "Register terlebih dahulu!", "Menu Error",JOptionPane.WARNING_MESSAGE);
+                    GMFrame.dispose();
+                    new RegisterScreen();
+                }else{
+                    GMFrame.dispose();
+                    new SearchPesawat();
+                }
                 break;
             case "Payment":
-                GMFrame.dispose();
-                new PaymentScreen();
+                if(user!=null){
+                    JOptionPane.showMessageDialog(GMFrame, "Register terlebih dahulu!", "Menu Error",JOptionPane.WARNING_MESSAGE);
+                    GMFrame.dispose();
+                    new RegisterScreen();
+                }else{
+                    GMFrame.dispose();
+                    new PaymentScreen();
+                }
                 break;
             case "Refund":
-                GMFrame.dispose();
-                new RefundScreen();
+                if(user!=null){
+                    JOptionPane.showMessageDialog(GMFrame, "Register terlebih dahulu!", "Menu Error",JOptionPane.WARNING_MESSAGE);
+                    GMFrame.dispose();
+                    new RegisterScreen();
+                }else{
+                    GMFrame.dispose();
+                    new RefundScreen();
+                }
                 break;
             case "Logout":
                 if (JOptionPane.showConfirmDialog(null, "Apakah anda yakin untuk logout?", "WARNING",

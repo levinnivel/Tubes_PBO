@@ -138,7 +138,7 @@ public class LoginScreen implements ActionListener{
                 break;
             case "Login as Guest":
                 User logUser = new User();
-                UserManager.getInstance().setUser(logUser);
+                UserManager.getInstance().setUser(logUser); //Guest masuk sebagai user
                 loginFrame.dispose();
                 JOptionPane.showMessageDialog(loginFrame,"Selamat datang Guest!");
                 new GuestMemberMenu();
@@ -146,6 +146,7 @@ public class LoginScreen implements ActionListener{
             case "Exit":
                 loginFrame.dispose();
                 JOptionPane.showMessageDialog(loginFrame,"Terima kasih sudah menggunakan!");
+                loginFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                 break;
         }
     }

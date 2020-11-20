@@ -25,11 +25,11 @@ import javax.swing.table.DefaultTableModel;
 public class ChooseSchedule implements ActionListener{
     static DatabaseHandler conn = new DatabaseHandler();
     
-    JFrame scheduleFrame = new JFrame();
+    JFrame schFrame = new JFrame();
     
 //    SELECT a.idJadwal, b.idPesawat, a.jamKeberangkatan, a.jamKedatagan, a.dateKeberangkatan, a.dateKedatangan, b.tipePesawat, b.hargaKursi, b.kapasitasBagasi, b.hargaBagasiPerKg, c.destinasiAsal, c.destinasiAkhir FROM jadwal a JOIN pesawat b ON a.idPesawat=b.idPesawat JOIN rute c ON a.idRute=c.idRute WHERE c.destinasic.destinasiAsal, c.destinasiAkhir FROM jadwal a JOIN pesawat b ON a.idPesawat=b.idPesawat JOIN rute c ON a.idRute=c.idRute WHERE c.destinasiAsal='Bandung' AND c.destinasiAkhir='Jakarta'
     //jlabel
-    JLabel chscTitle = new JLabel("Pesawat yang Tersedia");
+    JLabel labTitle = new JLabel("Pesawat yang Tersedia");
     
 //    Object data[][]={{"P001","First Class",800000,100000,12,"Bandung","Jakarta","2020-12-19","2020-12-19","09:00","12:00"},
 //                        {"P002","Economy",600000,90000,10,"Bandung","Jakarta","2020-12-19","2020-12-19","10:00","13:00"},
@@ -38,15 +38,16 @@ public class ChooseSchedule implements ActionListener{
 //                        {"P005","Economy",600000,90000,10,"Bandung","Jakarta","2020-12-19","2020-12-19","16:00","19:00"},
 //                        {"P007","First Class",800000,100000,12,"Bandung","Jakarta","2020-12-19","2020-12-19","18:00","20:00"}};
 //    String column[]={"ID Pesawat","Type Pesawat","Harga","Harga bagasi","Kapasitas Bagasi","Kota Asal","Kota Tujuan","Tanggal Berangkat","Tanggal Datang","Jam Berangkat","Jam Datang"};
-    JTable jdwlPesawat;
+    JTable tabPesawat;
     
     
     JButton submit = new JButton("Submit");
+    
     public ChooseSchedule(String kotaAsal, String kotaTujuan, String tglBerangkat,String tipe){
-        scheduleFrame.setSize(1300, 500);
-        scheduleFrame.setLocationRelativeTo(null);
-        scheduleFrame.setLayout(null);
-        scheduleFrame.setVisible(true);
+        schFrame.setSize(1300, 500);
+        schFrame.setLocationRelativeTo(null);
+        schFrame.setLayout(null);
+        schFrame.setVisible(true);
         
         conn.connect();
         String query = "SELECT a.idJadwal, b.idPesawat,c.destinasiAsal, c.destinasiAkhir, "
@@ -57,21 +58,22 @@ public class ChooseSchedule implements ActionListener{
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            jdwlPesawat = new JTable(buildTableModel(rs));
+            tabPesawat = new JTable(buildTableModel(rs));
         } catch (SQLException e) {
             e.printStackTrace();
         }
         
-        chscTitle.setBounds(600, 30, 200, 30);
-        JScrollPane sp = new JScrollPane(jdwlPesawat);
+        labTitle.setBounds(600, 30, 200, 30);
+        JScrollPane sp = new JScrollPane(tabPesawat);
         sp.setBounds(30, 90, 1230, 300);
         
         submit.setBounds(1100, 400, 100, 30);
+        submit.setActionCommand("Submit");
         submit.addActionListener(this);
         
-        scheduleFrame.add(chscTitle);
-        scheduleFrame.add(sp);
-        scheduleFrame.add(submit);
+        schFrame.add(labTitle);
+        schFrame.add(sp);
+        schFrame.add(submit);
         
         conn.disconnect();
     }
