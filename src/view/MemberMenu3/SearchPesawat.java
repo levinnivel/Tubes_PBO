@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -25,6 +26,9 @@ import org.jdatepicker.impl.UtilDateModel;
 public class SearchPesawat implements ActionListener{
     //frame
     JFrame bookingFrame = new JFrame();
+    
+    Member member = UserManager.getInstance().getMember();
+    
     //datepicker
     JDatePanelImpl datePanel;
     JDatePickerImpl datePicker;
@@ -43,7 +47,7 @@ public class SearchPesawat implements ActionListener{
     JComboBox cbTipePenerbangan = new JComboBox();
     //button
     JButton buttonSearch = new JButton("Search");
-    JButton buttonBack = new JButton("Search");
+    JButton buttonBack = new JButton("Back");
     
     public SearchPesawat(){
         //set frame
@@ -109,11 +113,19 @@ public class SearchPesawat implements ActionListener{
             case "Search":
                 String valKotaAsal = tfKotaAsal.getText();
                 String valKotaTujuan = tfKotaTujuan.getText();
-                String valTglBerangkat = model.getDay() + "-" + model.getMonth() + "-" + model.getYear();
+                String valTglBerangkat = model.getYear() + "-" + (model.getMonth()+1) + "-" + model.getDay();
                 String valTipe = cbTipePenerbangan.getSelectedItem().toString();;
                 
-                bookingFrame.dispose();
-                new ChooseSchedule(valKotaAsal, valKotaTujuan, valTglBerangkat, valTipe);
+                Global.setPassengerAmount(Integer.parseInt(JOptionPane.showInputDialog(bookingFrame,"Berapa banyak penumpang? (MAX 5)")));     
+                
+                int passAmount = Global.getPassengerAmount();
+                
+                if(passAmount<=5 && passAmount>0){
+                    bookingFrame.dispose();
+                    new ChooseSchedule(valKotaAsal, valKotaTujuan, valTglBerangkat, valTipe);
+                    }else{
+                       JOptionPane.showMessageDialog(bookingFrame, "Harap kurangi penumpang Anda.", "Pass Error",JOptionPane.WARNING_MESSAGE);
+                    }
                 break;
             case "Back":
                 bookingFrame.dispose();

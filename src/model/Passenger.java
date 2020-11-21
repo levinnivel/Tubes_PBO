@@ -6,24 +6,34 @@
 package model;
 
 public class Passenger {
+    private String idPassenger;
     private String fullName;
-    private String title;
+    private String panggilan;
     private Seat seat;
-    private int baggagePerKg;
+    private int bagasiPerKg;
     private String nationality;
 
     public Passenger(){
         
     }
     
-    public Passenger(String fullName, String title, Seat seat, int baggagePerKg, String nationality) {
+    public Passenger(String idPassenger, String fullName, String panggilan, Seat seat, int bagasiPerKg, String nationality) {
+        this.idPassenger = idPassenger;
         this.fullName = fullName;
-        this.title = title;
+        this.panggilan = panggilan;
         this.seat = seat;
-        this.baggagePerKg = baggagePerKg;
+        this.bagasiPerKg = bagasiPerKg;
         this.nationality = nationality;
     }
 
+    public String getIdPassenger() {
+        return idPassenger;
+    }
+
+    public void setIdPassenger(String idPassenger) {
+        this.idPassenger = idPassenger;
+    }
+    
     public String getFullName() {
         return fullName;
     }
@@ -32,12 +42,12 @@ public class Passenger {
         this.fullName = fullName;
     }
 
-    public String getTitle() {
-        return title;
+    public String getPanggilan() {
+        return panggilan;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setPanggilan(String panggilan) {
+        this.panggilan = panggilan;
     }
 
     public Seat getSeat() {
@@ -48,14 +58,14 @@ public class Passenger {
         this.seat = seat;
     }
 
-    public int getBaggagePerKg() {
-        return baggagePerKg;
+    public int getBagasiPerKg() {
+        return bagasiPerKg;
     }
 
-    public void setBaggagePerKg(int baggagePerKg) {
-        this.baggagePerKg = baggagePerKg;
+    public void setBagasiPerKg(int bagasiPerKg) {
+        this.bagasiPerKg = bagasiPerKg;
     }
-
+    
     public String getNationality() {
         return nationality;
     }

@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import controller.Controller;
 import controller.DatabaseHandler;
 import java.sql.ResultSet;
 import java.sql.SQLException;

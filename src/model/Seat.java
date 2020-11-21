@@ -5,20 +5,31 @@
  */
 package model;
 
-import static model.ActiveEnum.*;
+import static model.UsedEnum.*;
 
 public class Seat {
+    private String idSeat;
     private int seatNum;
-    private ActiveEnum isActive = ACTIVE;
+    private UsedEnum isUsed;
     
     public Seat(){
         
     }
 
-    public Seat(int seatNum) {
+    public Seat(String idSeat, int seatNum, UsedEnum isUsed) {
+        this.idSeat = idSeat;
         this.seatNum = seatNum;
+        this.isUsed = isUsed;
     }
 
+    public String getIdSeat() {
+        return idSeat;
+    }
+
+    public void setIdSeat(String idSeat) {
+        this.idSeat = idSeat;
+    }
+    
     public int getSeatNum() {
         return seatNum;
     }
@@ -26,8 +37,13 @@ public class Seat {
     public void setSeatNum(int seatNum) {
         this.seatNum = seatNum;
     }
-    
-    public void insertPassenger(){
-        this.isActive = INACTIVE;
+
+    public UsedEnum getIsUsed() {
+        return isUsed;
     }
+
+    public void setIsUsed(UsedEnum isUsed) {
+        this.isUsed = isUsed;
+    }
+    
 }

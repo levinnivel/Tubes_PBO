@@ -17,6 +17,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class AddSchedule implements ActionListener{
     static DatabaseHandler conn = new DatabaseHandler();
@@ -100,23 +102,40 @@ public class AddSchedule implements ActionListener{
             case "Add":
                 conn.connect();
                 
-                String query = "INSERT INTO jadwal VALUES(?,?,?,?,?,?,?)";
-                try {
-                    PreparedStatement stmt = conn.con.prepareStatement(query);
-                    stmt.setString(1, tfIDSchedule.getText());
-                    stmt.setString(2, tfIDRoute.getText());
-                    stmt.setString(3, tfIDPlane.getText());
-                    stmt.setString(4, tfDepartureTime.getText());
-                    stmt.setString(5, tfArrivalTime.getText());
-                    stmt.setString(6, tfDepartureDate.getText());
-                    stmt.setString(7, tfArrivalDate.getText());
-                    stmt.executeUpdate();
-                    addFrame.dispose();
-                    JOptionPane.showMessageDialog(addFrame,"Jadwal baru telah berhasil dibuat!");
-                    new EditScheduleMainScreen();
-                } catch (SQLException excIns) {
-                    excIns.printStackTrace();
+                ArrayList<String> listIDs = Controller.getListIDSchedules();
+                int j = 0;
+                boolean isExist = false;
+                while (listIDs.size()>j && !isExist) {
+                    if(tfIDSchedule.getText().equals(listIDs.get(j))){
+                        isExist = true;
+                    }
+                    System.out.println(listIDs.get(j));
+                    j++;
+                }
+                
+                if(!isExist){
+                    String query = "INSERT INTO jadwal VALUES(?,?,?,?,?,?,?)";
+                    try {
+                        PreparedStatement stmt = conn.con.prepareStatement(query);
+                        stmt.setString(1, tfIDSchedule.getText());
+                        stmt.setString(2, tfIDRoute.getText());
+                        stmt.setString(3, tfIDPlane.getText());
+                        stmt.setString(4, tfDepartureTime.getText());
+                        stmt.setString(5, tfArrivalTime.getText());
+                        stmt.setString(6, tfDepartureDate.getText());
+                        stmt.setString(7, tfArrivalDate.getText());
+                        stmt.executeUpdate();
+                        addFrame.dispose();
+                        JOptionPane.showMessageDialog(addFrame,"Jadwal baru telah berhasil dibuat!");
+                        new EditScheduleMainScreen();
+                    } catch (SQLException excIns) {
+                        excIns.printStackTrace();
+                        JOptionPane.showMessageDialog(addFrame, "Jadwal baru gagal dibuat!", "Register Error",JOptionPane.WARNING_MESSAGE);
+                    }
+                }else{
                     JOptionPane.showMessageDialog(addFrame, "ID jadwal sudah ada!", "Register Error",JOptionPane.WARNING_MESSAGE);
+                    addFrame.dispose();
+                    new AddSchedule();
                 }
                 
                 conn.disconnect();

@@ -14,19 +14,20 @@ public class Booking {
     private String dateBooking;
     private int totalPrice;
     private JadwalPesawat schedule = null;
-    private ArrayList<Passenger> passenger = new ArrayList();
+    public Passenger[] passenger = new Passenger[Global.getPassengerAmount()-1];
     private PaidEnum isPaid;
     private ActiveEnum isActive;
     
     public Booking(){
         
     }
-    
-    public Booking(String idBooking, String dateBooking, int totalPrice, JadwalPesawat schedule) {
+
+    public Booking(String idBooking, String dateBooking, int totalPrice, PaidEnum isPaid, ActiveEnum isActive) {
         this.idBooking = idBooking;
         this.dateBooking = dateBooking;
         this.totalPrice = totalPrice;
-        this.schedule = schedule;
+        this.isPaid = isPaid;
+        this.isActive = isActive;
     }
 
     public String getIdBooking() {
@@ -66,14 +67,14 @@ public class Booking {
         this.schedule = schedule;
     }
 
-    public ArrayList<Passenger> getPassenger() {
+    public Passenger[] getPassenger() {
         return passenger;
     }
 
-    public void setPassenger(ArrayList<Passenger> passenger) {
+    public void setPassenger(Passenger[] passenger) {
         this.passenger = passenger;
     }
-
+    
     public PaidEnum isPaid() {
         return isPaid;
     }
@@ -94,4 +95,7 @@ public class Booking {
         this.isActive = INACTIVE;
     }
     
+    public void setEachPassenger(int i, Passenger p){
+        passenger[i] = p;
+    }
 }

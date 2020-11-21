@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 public class BookingManager {
     
     // lazy instantiation
@@ -29,5 +31,4 @@ public class BookingManager {
     public void setBooking(Booking booking) {
         this.booking = booking;
     }
-    
 }
