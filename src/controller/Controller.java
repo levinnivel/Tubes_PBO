@@ -91,7 +91,7 @@ public class Controller {
         return (IDs);
     }
     
-    public static int getLastIDBooking(){
+    public static int getLastIDBookingInteger(){
         String ID = "";
         conn.connect();
         String query = "SELECT idBooking FROM booking WHERE idBooking=(SELECT max(idBooking) FROM booking)";
@@ -106,10 +106,66 @@ public class Controller {
             e.printStackTrace();
         }
         
-        int endIdx = ID.length() + 1;
+        int endIdx = ID.length();
         int countID = Integer.parseInt(ID.substring(2,endIdx));
         
         conn.disconnect();
         return (countID);
     }
+    
+    public static int getLastIDPenumpangInteger(){
+        String ID = "";
+        conn.connect();
+        String query = "SELECT idPenumpang FROM penumpang WHERE idPenumpang=(SELECT max(idPenumpang) FROM Penumpang)";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
+            while (rs.next()) {
+                ID = rs.getString("idPenumpang");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        int endIdx = ID.length();
+        int countID = Integer.parseInt(ID.substring(2,endIdx));
+        conn.disconnect();
+        return (countID);
+    }
+    
+    public static ArrayList<String> getAllAvailableSeats(String idPesawat) {
+        ArrayList<String> kursi = new ArrayList<>();
+        conn.connect();
+        String query = "SELECT noKursi FROM kursi WHERE idPesawat='" + idPesawat + "' AND statusKursi='KOSONG'";
+        try {
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+//                User user = new User();
+                kursi.add(rs.getString("noKursi"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (kursi);
+    }
+    
+    public static String[] getStringArray(ArrayList<String> arr) 
+    { 
+  
+        // declaration and initialise String Array 
+        String str[] = new String[arr.size()]; 
+  
+        // Convert ArrayList to object array 
+        Object[] objArr = arr.toArray(); 
+  
+        // Iterating and converting to String 
+        int i = 0; 
+        for (Object obj : objArr) { 
+            str[i++] = (String)obj; 
+        } 
+  
+        return str; 
+    } 
 }

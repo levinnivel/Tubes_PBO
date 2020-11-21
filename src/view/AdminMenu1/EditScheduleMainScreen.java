@@ -123,6 +123,7 @@ public class EditScheduleMainScreen implements ActionListener{
                     new EditScheduleMainScreen();
                 } catch (SQLException excDel) {
                     excDel.printStackTrace();
+                    JOptionPane.showMessageDialog(editFrame, "Penghapusan jadwal gagal!", "Delete Error",JOptionPane.WARNING_MESSAGE);
                 }
                 conn.disconnect();
                 break;

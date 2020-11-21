@@ -9,20 +9,20 @@ public class Pesawat extends Maskapai{
     String idPesawat;
     String tipePesawat;
     int hargaKursi;
-    int hargaBagasiPerKg;
     int kapasitasBagasi;
+    int hargaBagasiPerKg;
     
     public Pesawat(){
         
     }
 
-    public Pesawat(String idPesawat, String tipePesawat, int hargaKursi, int hargaBagasiPerKg, int kapasitasBagasi, String kodeMaskapai, String notelpMaskapai, String namaMaskapai) {
+    public Pesawat(String idPesawat, String tipePesawat, int hargaKursi, int kapasitasBagasi, int hargaBagasiPerKg, String kodeMaskapai, String notelpMaskapai, String namaMaskapai) {
         super(kodeMaskapai, notelpMaskapai, namaMaskapai);
         this.idPesawat = idPesawat;
         this.tipePesawat = tipePesawat;
         this.hargaKursi = hargaKursi;
-        this.hargaBagasiPerKg = hargaBagasiPerKg;
         this.kapasitasBagasi = kapasitasBagasi;
+        this.hargaBagasiPerKg = hargaBagasiPerKg;
     }
     
     public String getIdPesawat() {
@@ -49,20 +49,20 @@ public class Pesawat extends Maskapai{
         this.hargaKursi = hargaKursi;
     }
 
-    public int getHargaBagasiPerKg() {
-        return hargaBagasiPerKg;
-    }
-
-    public void setHargaBagasiPerKg(int hargaBagasiPerKg) {
-        this.hargaBagasiPerKg = hargaBagasiPerKg;
-    }
-
     public int getKapasitasBagasi() {
         return kapasitasBagasi;
     }
 
     public void setKapasitasBagasi(int kapasitasBagasi) {
         this.kapasitasBagasi = kapasitasBagasi;
+    }
+
+    public int getHargaBagasiPerKg() {
+        return hargaBagasiPerKg;
+    }
+
+    public void setHargaBagasiPerKg(int hargaBagasiPerKg) {
+        this.hargaBagasiPerKg = hargaBagasiPerKg;
     }
     
 }

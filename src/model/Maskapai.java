@@ -5,7 +5,7 @@
  */
 package model;
 
-public class Maskapai {
+public abstract class Maskapai {
     private String kodeMaskapai;
     private String notelpMaskapai;
     private String namaMaskapai;

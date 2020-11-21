@@ -14,11 +14,20 @@ public class Rute {
         
     }
 
-    public Rute(String destinasiAsal, String destinasiTujuan) {
+    public Rute(String idRute, String destinasiAsal, String destinasiTujuan) {
+        this.idRute = idRute;
         this.destinasiAsal = destinasiAsal;
         this.destinasiTujuan = destinasiTujuan;
     }
 
+    public String getIdRute() {
+        return idRute;
+    }
+
+    public void setIdRute(String idRute) {
+        this.idRute = idRute;
+    }
+    
     public String getDestinasiAsal() {
         return destinasiAsal;
     }
