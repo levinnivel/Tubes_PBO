@@ -10,9 +10,5 @@ import view.*;
 public class Main {
     public static void main(String[] args){
         new LoginScreen();
-//          int a = Controller.getLastIDPenumpangInteger();
-//          int b = Controller.getLastIDBookingInteger();
-//          System.out.println("B-0" + a);
-//          System.out.println("P-0" + b);
     }
 }

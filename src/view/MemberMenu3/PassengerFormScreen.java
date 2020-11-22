@@ -57,10 +57,6 @@ public class PassengerFormScreen implements ActionListener{
     int count = Global.getPassengerCounter();
     
     public PassengerFormScreen(){
-        System.out.println("Jumlah Penumpang " + passAmount);
-        System.out.println("Form ke " + Global.getPassengerCounter());
-        System.out.println("Form ke " + count);
-        
         passFrame.setSize(800,350);
         passFrame.setLocationRelativeTo(null);
         passFrame.setLayout(null);
@@ -180,7 +176,6 @@ public class PassengerFormScreen implements ActionListener{
                 if(passAmount==1 || Global.getPassengerCounter()==passAmount){
                     Global.setPassengerCounter(0);
                     passFrame.dispose();
-                    JOptionPane.showMessageDialog(passFrame,"BILL SCREEN!");
                     new BillScreen();
                 }else if(Global.getPassengerCounter()<passAmount){
                     passFrame.dispose();

@@ -25,7 +25,7 @@ public class LoginScreen implements ActionListener{
     static DatabaseHandler conn = new DatabaseHandler();
     
     JFrame loginFrame = new JFrame();
-    JLabel labTitle = new JLabel("Welcome to Our Booking Apps!");
+    JLabel labTitle = new JLabel("WELCOME TO Speedwagon Apps!");
     JLabel labCredit = new JLabel("By Levin, Aristo, Andreas V");
     JLabel labUsername = new JLabel("Username : ");
     JLabel labPassword = new JLabel("Password : ");
@@ -40,6 +40,7 @@ public class LoginScreen implements ActionListener{
         loginFrame.setLocationRelativeTo(null);
         loginFrame.setLayout(null);
         loginFrame.setVisible(true);
+        loginFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         labTitle.setBounds(150,30, 200,20);
         labCredit.setBounds(160,50, 200,20);
@@ -147,7 +148,6 @@ public class LoginScreen implements ActionListener{
             case "Exit":
                 loginFrame.dispose();
                 JOptionPane.showMessageDialog(loginFrame,"Terima kasih sudah menggunakan!");
-                loginFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                 break;
         }
     }

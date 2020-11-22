@@ -5,6 +5,7 @@
  */
 package view.MemberMenu5;
 
+import controller.Controller;
 import model.*;
 import view.*;
 import static model.ActiveEnum.*;
@@ -111,7 +112,8 @@ public class RefundScreen implements ActionListener{
                         }
                         
                         String query2 = "UPDATE booking SET statusTransaksi='INACTIVE' "
-                        + "WHERE emailMember='" + member.getEmail() + "'";
+                        + "WHERE emailMember='" + member.getEmail() + "' "
+                        + "AND idBooking='" + booking.getIdBooking() + "'";
                         
                         try {
                             Statement stmt = conn.con.createStatement();
@@ -137,16 +139,28 @@ public class RefundScreen implements ActionListener{
             case "Cancel":
                 if(booking.isPaid()==BELUM_LUNAS && booking.isActive()==ACTIVE){
                     conn.connect();
-
-                    String query = "DELETE FROM member WHERE emailMember='" + member.getEmail() + "'";
+                    
+                    String query1 = "DELETE FROM detail_penumpang WHERE idBooking='" + booking.getIdBooking() + "'";
                     try {
                         Statement stmt = conn.con.createStatement();
-                        stmt.executeUpdate(query);
+                        stmt.executeUpdate(query1);
+                    } catch (SQLException excDel) {
+                        excDel.printStackTrace();
+                        JOptionPane.showMessageDialog(refFrame, "Penghapusan detail gagal!", "Cancel Error",JOptionPane.WARNING_MESSAGE);
+                    }
+                    
+                    String query2 = "DELETE FROM booking WHERE idBooking='" + booking.getIdBooking() + "'";
+                    try {
+                        Statement stmt = conn.con.createStatement();
+                        stmt.executeUpdate(query2);
                         JOptionPane.showMessageDialog(refFrame,"Booking telah dibatalkan.");
                     } catch (SQLException excDel) {
                         excDel.printStackTrace();
+                        JOptionPane.showMessageDialog(refFrame, "Penghapusan b gagal!", "Cancel Error",JOptionPane.WARNING_MESSAGE);
                     }
-                    
+                    BookingManager.getInstance().setBooking(null);
+                    refFrame.dispose();
+                    new GuestMemberMenu();
                     conn.disconnect();    
                 }else if(booking.isPaid()==LUNAS){
                     JOptionPane.showMessageDialog(refFrame, "Anda sudah membayar sebelumnya, harap gunakan tombol Refund jika ingin me-refund.", "Cancel Error",JOptionPane.WARNING_MESSAGE);

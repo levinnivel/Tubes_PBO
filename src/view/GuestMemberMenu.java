@@ -21,8 +21,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class GuestMemberMenu implements ActionListener{
+    static DatabaseHandler conn = new DatabaseHandler();
+    
     User user = UserManager.getInstance().getUser();
     User member = UserManager.getInstance().getMember();
     
@@ -46,13 +51,15 @@ public class GuestMemberMenu implements ActionListener{
         GMFrame.setVisible(true);
         
         if(user == null){
-            Booking book = Controller.getFromDBTest(member.getEmail());
+//            Booking book = Controller.getFromDBTest(member.getEmail());
+            Booking book = BookingManager.getInstance().getBooking();
             BookingManager.getInstance().setBooking(book);
-//            Booking book = BookingManager.getInstance().getBooking();
+
             String name = member.getFullName();
             
             labName = new JLabel("Hello, " + name + "!");
-            if(book.isPaid()==BELUM_LUNAS){
+            if(book!=null){
+                if(book.isPaid()==BELUM_LUNAS){
                 String idBook = book.getIdBooking();
                 int priceBook = book.getTotalPrice();
                 labIDBook = new JLabel("ID Booking : " + idBook);
@@ -61,6 +68,7 @@ public class GuestMemberMenu implements ActionListener{
                 labTotalPrice.setBounds(75,125, 200,20);
                 GMFrame.add(labIDBook);
                 GMFrame.add(labTotalPrice);
+                }
             }
             
             buttonProfile.setActionCommand("Profile");
@@ -145,8 +153,12 @@ public class GuestMemberMenu implements ActionListener{
                     GMFrame.dispose();
                     new RegisterScreen();
                 }else{
-                    GMFrame.dispose();
-                    new PaymentScreen();
+                    if(BookingManager.getInstance().getBooking()!=null){
+                        GMFrame.dispose();
+                        new PaymentScreen();
+                    }else{
+                        JOptionPane.showMessageDialog(GMFrame, "SIlahkan booking terlebih dahulu.", "Payment Error",JOptionPane.WARNING_MESSAGE);
+                    }
                 }
                 break;
             case "Refund":
@@ -155,8 +167,33 @@ public class GuestMemberMenu implements ActionListener{
                     GMFrame.dispose();
                     new RegisterScreen();
                 }else{
-                    GMFrame.dispose();
-                    new RefundScreen();
+                    if(BookingManager.getInstance().getBooking()!=null){
+                        GMFrame.dispose();
+                        new RefundScreen();
+                    }else{
+                        conn.connect();
+                        String idLastBooking = ("B-" + Integer.toString(Controller.getLastIDBookingInteger()));
+                        String query = "SELECT * FROM booking "
+                                + "WHERE emailMember='" + member.getEmail() + "' "
+                                + "AND idBooking='" + idLastBooking + "'";
+                        
+                        Booking booking = new Booking();
+                        booking.setIsActive(ACTIVE);
+                        booking.setIsPaid(LUNAS);
+                        try {
+                            Statement stmt = conn.con.createStatement();
+                            ResultSet rs = stmt.executeQuery(query);
+                            while (rs.next()) {
+                                booking.setIdBooking(rs.getString("idBooking"));
+                            }
+                            BookingManager.getInstance().setBooking(booking);
+                            GMFrame.dispose();
+                            new RefundScreen();
+                        } catch (SQLException excGet) {
+                            excGet.printStackTrace();
+                            JOptionPane.showMessageDialog(GMFrame, "Pengambilan database error!", "DB Error",JOptionPane.WARNING_MESSAGE);
+                        }
+                    }
                 }
                 break;
             case "Logout":

@@ -119,15 +119,11 @@ public class ChooseSchedule implements ActionListener{
                     Rute rute = new Rute();
                     Pesawat pesawat = new Pesawat();
                     
-                    
-                    int passAmount = Global.getPassengerAmount();
-                    
                     jadwal.setIdJadwal(selectedData);
                     booking.setIdBooking("B-" + (Controller.getLastIDBookingInteger()+1));
                     booking.setDateBooking(strDate);
-                    booking.setPassenger(new Passenger[passAmount]);
                     booking.setIsPaid(BELUM_LUNAS);
-                    booking.setIsActive(ACTIVE);
+                    booking.setIsActive(INACTIVE);
 
                     boolean status1 = false;
                     String query1 = "SELECT * FROM jadwal WHERE idJadwal='" + selectedData + "'";
@@ -200,9 +196,6 @@ public class ChooseSchedule implements ActionListener{
                         
                         JOptionPane.showMessageDialog(schFrame,"Pengambilan dari database berhasil!");
                         
-                        
-                        Passenger[] arrPassenger = new Passenger[passAmount-1];
-                        booking.setPassenger(arrPassenger);
                         BookingManager.getInstance().setBooking(booking);
                         
                         String query5 = "INSERT INTO booking VALUES(?,?,?,?,?,?,?)";

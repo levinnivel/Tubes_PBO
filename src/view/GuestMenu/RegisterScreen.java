@@ -96,7 +96,7 @@ public class RegisterScreen implements ActionListener{
                 newMember.setPhoneNum(tfPhone.getText());
                 newMember.setAddress(tfAddress.getText());
 
-                String query = "INSERT INTO member VALUES(?,?,?,?,?,?)";
+                String query = "INSERT INTO member VALUES(?,?,?,?,?,?,?)";
                 try {
                     PreparedStatement stmt = conn.con.prepareStatement(query);
                     stmt.setString(1, newMember.getEmail());
@@ -105,6 +105,7 @@ public class RegisterScreen implements ActionListener{
                     stmt.setString(4, newMember.getPhoneNum());
                     stmt.setString(5, newMember.getAddress());
                     stmt.setInt(6, 0);
+                    stmt.setInt(7, 0);
                     stmt.executeUpdate();
                     UserManager.getInstance().setMember(newMember);
                     regFrame.dispose();

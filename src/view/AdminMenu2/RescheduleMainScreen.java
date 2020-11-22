@@ -29,10 +29,9 @@ public class RescheduleMainScreen implements ActionListener{
     
     JLabel labTitle = new JLabel("Edit Schedule");
     JLabel labList = new JLabel("List Pesawat");
+    JLabel labNote = new JLabel("Harap klik idJadwal untuk memilih.");
     
-    JButton buttonReIDSch = new JButton("Reschedule by idJadwal");
-    JButton buttonReIDRou = new JButton("Reschedule by idRute");
-    JButton buttonReIDPla = new JButton("Reschedule by idPesawat");
+    JButton buttonResch = new JButton("Reschedule");
     JButton buttonBack = new JButton("Back");
     
     String selectedData = null;
@@ -46,7 +45,7 @@ public class RescheduleMainScreen implements ActionListener{
         conn.connect();
         String query = "SELECT a.idJadwal, b.idPesawat, c.idRute, c.destinasiAsal, c.destinasiAkhir, "
                 + "a.jamKeberangkatan, a.jamKedatangan, a.dateKeberangkatan, a.dateKedatangan, "
-                + "b.tipePesawat, b.hargaKursi, b.kapasitasBagasi, b.hargaBagasiPerKg, "
+                + "b.tipePesawat, b.hargaKursi, b.kapasitasBagasi, b.hargaBagasiPerKg "
                 + "FROM jadwal a JOIN pesawat b ON a.idPesawat=b.idPesawat JOIN rute c ON a.idRute=c.idRute";
         try {
             Statement stmt = conn.con.createStatement();
@@ -77,18 +76,11 @@ public class RescheduleMainScreen implements ActionListener{
         
         labTitle.setBounds(600,10, 100,15);
         labList.setBounds(600,30, 100,15);
+        labList.setBounds(600,60, 100,15);
         
-        buttonReIDSch.setActionCommand("Reschedule Jadwal");
-        buttonReIDSch.addActionListener(this);
-        buttonReIDSch.setBounds(300,420, 100,40);
-        
-        buttonReIDRou.setActionCommand("Reschedule Rute");
-        buttonReIDRou.addActionListener(this);
-        buttonReIDRou.setBounds(600,420, 100,40);
-        
-        buttonReIDPla.setActionCommand("Reschedule Pesawat");
-        buttonReIDPla.addActionListener(this);
-        buttonReIDPla.setBounds(900,420, 100,40);
+        buttonResch.setActionCommand("Reschedule");
+        buttonResch.addActionListener(this);
+        buttonResch.setBounds(300,420, 200,40);
         
         buttonBack.setActionCommand("Back");
         buttonBack.addActionListener(this);
@@ -97,7 +89,7 @@ public class RescheduleMainScreen implements ActionListener{
         resFrame.add(sp);
         resFrame.add(labTitle);
         resFrame.add(labList);
-        resFrame.add(buttonReIDSch);
+        resFrame.add(buttonResch);
         resFrame.add(buttonBack);
         
         conn.disconnect();
@@ -108,6 +100,9 @@ public class RescheduleMainScreen implements ActionListener{
         String command = e.getActionCommand();
         switch(command){
             case "Reschedule":
+                Global.setSelectedIDSchedule(selectedData);
+                resFrame.dispose();
+                new UpdateScheduleForm();
                 break;
             case "Back":
                 resFrame.dispose();

@@ -123,9 +123,9 @@ public class SearchPesawat implements ActionListener{
                 if(passAmount<=5 && passAmount>0){
                     bookingFrame.dispose();
                     new ChooseSchedule(valKotaAsal, valKotaTujuan, valTglBerangkat, valTipe);
-                    }else{
-                       JOptionPane.showMessageDialog(bookingFrame, "Harap kurangi penumpang Anda.", "Pass Error",JOptionPane.WARNING_MESSAGE);
-                    }
+                }else{
+                   JOptionPane.showMessageDialog(bookingFrame, "Harap kurangi penumpang Anda.", "Pass Error",JOptionPane.WARNING_MESSAGE);
+                }
                 break;
             case "Back":
                 bookingFrame.dispose();
