@@ -7,7 +7,6 @@ package view.AdminMenu1;
 
 import static controller.Controller.buildTableModel;
 import controller.*;
-import model.*;
 import view.*;
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +17,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 public class EditScheduleMainScreen implements ActionListener{
     static DatabaseHandler conn = new DatabaseHandler();
@@ -56,6 +54,7 @@ public class EditScheduleMainScreen implements ActionListener{
             e.printStackTrace();
         }
         
+//        untuk mengambbil data dari jtable onclick
         tabSchedule.setCellSelectionEnabled(true);
         ListSelectionModel cellSelectionModel = tabSchedule.getSelectionModel();
         cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -133,8 +132,4 @@ public class EditScheduleMainScreen implements ActionListener{
                 break;
         }
     }
-
-//    public static void main(String[] args){
-//        new EditScheduleMainScreen();
-//    }
 }

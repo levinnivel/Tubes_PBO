@@ -5,11 +5,8 @@
  */
 package model;
 
-import java.util.ArrayList;
 
 public class UserManager {
-    
-    // lazy instantiation
     private static UserManager instance;
     private User user;
     private Member member;

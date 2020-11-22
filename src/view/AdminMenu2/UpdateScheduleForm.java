@@ -6,8 +6,6 @@
 package view.AdminMenu2;
 
 import model.*;
-import view.*;
-import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import controller.DatabaseHandler;
 import controller.DateLabelFormatter;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -66,7 +63,7 @@ public class UpdateScheduleForm implements ActionListener{
         String valArrivalTime = "";
         
         conn.connect();
-        
+//        menampilkan data jam yang sudah ada di database
         String query = "SELECT * FROM jadwal WHERE idJadwal='" + idJadwal + "'";
         
         try {

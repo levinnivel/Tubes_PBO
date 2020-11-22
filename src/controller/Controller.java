@@ -52,28 +52,7 @@ public class Controller {
 
     }
     
-    public static Booking getFromDBTest(String email){
-        conn.connect();
-        
-        String query = "SELECT idBooking, totalPrice, dateBooking, statusBayar, statusTransaksi FROM booking WHERE emailMember='" + email + "'";
-        Booking booking = new Booking();
-        try {
-            Statement stmt = conn.con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                booking.setIdBooking(rs.getString("idBooking"));
-                booking.setTotalPrice(rs.getInt("totalPrice"));
-                booking.setDateBooking(rs.getString("dateBooking"));
-                booking.setIsPaid(PaidEnum.valueOf(rs.getString("statusBayar")));
-                booking.setIsActive(ActiveEnum.valueOf(rs.getString("statusTransaksi")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        
-        return booking;
-    }
-    
+    //mengambil id jadwal ke dalam arraylist
     public static ArrayList<String> getListIDSchedules(){
         ArrayList<String> IDs = new ArrayList();
         conn.connect();
@@ -91,6 +70,7 @@ public class Controller {
         return (IDs);
     }
     
+    //mengambil id booking terakhir dari database
     public static int getLastIDBookingInteger(){
         String ID = "";
         conn.connect();
@@ -113,6 +93,7 @@ public class Controller {
         return (countID);
     }
     
+    //mengambil id penumpang terakhir yang ada di database
     public static int getLastIDPenumpangInteger(){
         String ID = "";
         conn.connect();
@@ -134,6 +115,7 @@ public class Controller {
         return (countID);
     }
     
+    //mengambil kursi yang tersedia di database
     public static ArrayList<String> getAllAvailableSeats(String idPesawat) {
         ArrayList<String> kursi = new ArrayList<>();
         conn.connect();
@@ -142,7 +124,6 @@ public class Controller {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-//                User user = new User();
                 kursi.add(rs.getString("noKursi"));
             }
         } catch (SQLException e) {
@@ -151,6 +132,7 @@ public class Controller {
         return (kursi);
     }
     
+    //konversi dari array list ke array string
     public static String[] getStringArray(ArrayList<String> arr) 
     { 
   

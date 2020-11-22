@@ -47,7 +47,7 @@ public class ProfileMenu implements ActionListener{
         labPoint.setBounds(50, 250, 200, 30);
         labBalance.setBounds(50, 300, 200, 30);
         
-        
+//        button untuk melihat history member
         butHistory.setBounds(400, 300, 100, 30);
         butHistory.setActionCommand("History");
         butHistory.addActionListener(this);

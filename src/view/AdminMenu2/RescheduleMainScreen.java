@@ -18,7 +18,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 public class RescheduleMainScreen implements ActionListener{
     static DatabaseHandler conn = new DatabaseHandler();
@@ -54,7 +53,7 @@ public class RescheduleMainScreen implements ActionListener{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+//        untuk mengambbil data dari jtable onclick
         tabSchedule.setCellSelectionEnabled(true);
         ListSelectionModel cellSelectionModel = tabSchedule.getSelectionModel();
         cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

@@ -5,10 +5,11 @@
  */
 package model;
 
-import java.util.ArrayList;
-
+//variabel yang dibutuhkan oleh beberapa kelas tapi tidak berupa model
 public class Global{
+    //jumlah penumpang
     private static int passengerAmount = 1;
+    //untuk menghitung looping frame pada passenger screen
     private static int passengerCounter = 0;
     private static int totalPrice = 0;
     private static String selectedIDSchedule;

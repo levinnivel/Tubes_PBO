@@ -5,18 +5,10 @@
  */
 package view.MemberMenu4;
 
-import static model.ActiveEnum.*;
 import static model.PaidEnum.*;
 import view.*;
-import view.MemberMenu1.*;
-import view.MemberMenu2.*;
-import view.MemberMenu3.*;
-import view.MemberMenu4.*;
-import view.MemberMenu5.*;
-import view.GuestMenu.*;
 import model.*;
 import controller.*;
-import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -111,6 +103,7 @@ public class PaymentScreen implements ActionListener{
         buttonBack.setActionCommand("Back");
         buttonBack.addActionListener(this);
         
+//        saat memilih salah satu method maka method yang lain tidak dapat dipilih
         rmethod6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -211,6 +204,7 @@ public class PaymentScreen implements ActionListener{
                 int priceValue = booking.getTotalPrice();
                 int pointValue = member.getPoint();
                 
+//                membayar dapat menggunakan total poin yang dimiliki member
                 String[] opt = {"Ya", "Tidak"};
                 int isUsePoint = JOptionPane.showOptionDialog(payFrame, "Ingin menggunakan poin anda? ", "Pilih", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opt, null);
 
@@ -224,6 +218,7 @@ public class PaymentScreen implements ActionListener{
                     member.setPoint(pointValue);
                 }
                 
+//                menggunakan balance yang dimiliki member
                 int amountPaid = 0;
                 if(rmethod6.isSelected()){
                     amountPaid = Integer.parseInt(labBalanceAmount.getText()) - priceValue; //not the amount, change after being paid
@@ -239,6 +234,7 @@ public class PaymentScreen implements ActionListener{
                     isSuccess = false;
                 }
                 
+//                mengupdate data balance di database
                 if(isSuccess){
                     if(rmethod6.isSelected()){
                         String query = "UPDATE member SET balance='" + amountPaid + "', "
@@ -254,6 +250,7 @@ public class PaymentScreen implements ActionListener{
                             JOptionPane.showMessageDialog(payFrame, "Saldo gagal diperbaharui!", "Payment Error",JOptionPane.WARNING_MESSAGE);
                         }
                     }else{
+//                        mengupdate poin yang dipakai untuk pembayaran
                         String query = "UPDATE member SET poinMember='" + member.getPoint() + "', "
                         + "WHERE emailMember='" + member.getEmail() + "'";
                         try {
@@ -265,7 +262,7 @@ public class PaymentScreen implements ActionListener{
                             JOptionPane.showMessageDialog(payFrame, "Poin gagal diperbaharui!", "Payment Error",JOptionPane.WARNING_MESSAGE);
                         }
                     }
-                    
+//                    jika sudah bayar makan status bayar akan di set LUNAS
                     String query = "UPDATE booking SET statusBayar='LUNAS' "
                         + "WHERE emailMember='" + member.getEmail() + "' "
                         + "AND dateBooking='" + booking.getDateBooking() + "'";

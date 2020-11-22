@@ -10,10 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JFormattedTextField;
 
-/**
- *
- * @author SKY-PC
- */
 public class DateLabelFormatter extends JFormattedTextField.AbstractFormatter {
     private String datePattern = "yyyy-MM-dd";
     private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);

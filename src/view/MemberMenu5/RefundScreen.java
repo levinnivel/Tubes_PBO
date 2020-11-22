@@ -5,7 +5,6 @@
  */
 package view.MemberMenu5;
 
-import controller.Controller;
 import model.*;
 import view.*;
 import static model.ActiveEnum.*;
@@ -18,7 +17,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.*;
 import static controller.Controller.buildTableModel;
-import javax.swing.table.DefaultTableModel;
 
 public class RefundScreen implements ActionListener{
     static DatabaseHandler conn = new DatabaseHandler();
@@ -111,6 +109,7 @@ public class RefundScreen implements ActionListener{
                             JOptionPane.showMessageDialog(refFrame, "Saldo gagal diperbaharui!", "Register Error",JOptionPane.WARNING_MESSAGE);
                         }
                         
+//                        jika refund, status di statustransaksi menjadi INACTIVE
                         String query2 = "UPDATE booking SET statusTransaksi='INACTIVE' "
                         + "WHERE emailMember='" + member.getEmail() + "' "
                         + "AND idBooking='" + booking.getIdBooking() + "'";
@@ -139,7 +138,7 @@ public class RefundScreen implements ActionListener{
             case "Cancel":
                 if(booking.isPaid()==BELUM_LUNAS && booking.isActive()==ACTIVE){
                     conn.connect();
-                    
+//                    jika belum lunas(cancel) maka data akan di delete dari detail penumpang dan booking
                     String query1 = "DELETE FROM detail_penumpang WHERE idBooking='" + booking.getIdBooking() + "'";
                     try {
                         Statement stmt = conn.con.createStatement();

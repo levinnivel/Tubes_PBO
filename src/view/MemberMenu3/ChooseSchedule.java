@@ -23,11 +23,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.table.DefaultTableModel;
 import static model.PaidEnum.*;
 import static model.ActiveEnum.*;
 
@@ -54,6 +52,7 @@ public class ChooseSchedule implements ActionListener{
         schFrame.setLayout(null);
         schFrame.setVisible(true);
         
+//      mengambil data sesuai masukan member berdasarkan kota asal, kota tujuan, tipe pesawat, dan tanggal berangkat
         conn.connect();
         String query = "SELECT a.idJadwal, b.idPesawat, b.kodeMaskapai, c.destinasiAsal, c.destinasiAkhir, "
                 + "a.jamKeberangkatan, a.jamKedatangan, a.dateKeberangkatan, a.dateKedatangan, "
@@ -69,6 +68,7 @@ public class ChooseSchedule implements ActionListener{
             e.printStackTrace();
         }
         
+//      memilih tabel
         tabPesawat.setCellSelectionEnabled(true);
         ListSelectionModel cellSelectionModel = tabPesawat.getSelectionModel();
         cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

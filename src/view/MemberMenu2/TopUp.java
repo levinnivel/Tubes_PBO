@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import controller.DatabaseHandler;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;  
@@ -95,6 +94,10 @@ public class TopUp implements ActionListener {
                 int topUpAmount = Integer.parseInt(tfTopAmount.getText());
                 int topUpPoint = 0;
                 
+/*              hanya bisa memilih 1 jenis pembayaran untuk top-up. 
+                setiap top-up member akan mendapatkan sejumlah poin
+                setiap metode pembayaran berbeda-beda jumlah poin yang didapat member
+*/
                 String valMethod = "";
                 if(rmethod1.isSelected()){
                     valMethod = "Transfer ATM";
@@ -112,10 +115,12 @@ public class TopUp implements ActionListener {
                     topUpPoint = topUpAmount/15;
                 }
                 
+//              get tanggal dan jam transaksi top-up
                 Date date = Calendar.getInstance().getTime();  
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
                 String strDate = dateFormat.format(date);  
                 
+//                insert ke tabel payment di database
                 String query1 = "INSERT INTO payment VALUES(?,?,?,?)";
                 try {
                     PreparedStatement stmt = conn.con.prepareStatement(query1);
@@ -134,6 +139,7 @@ public class TopUp implements ActionListener {
                 int newAmount = member.getBalance() + topUpAmount;
                 int newPoint = member.getPoint() + topUpPoint;
                 
+//                update data balance member dan poin
                 String query2 = "UPDATE member SET balance='" + newAmount + "', "
                         + "poinMember='" + newPoint + "' "
                         + "WHERE emailMember='" + member.getEmail() + "'";

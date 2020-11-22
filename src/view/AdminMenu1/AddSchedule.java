@@ -6,19 +6,14 @@
 package view.AdminMenu1;
 
 import controller.*;
-import model.*;
-import view.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class AddSchedule implements ActionListener{
     static DatabaseHandler conn = new DatabaseHandler();
@@ -101,7 +96,7 @@ public class AddSchedule implements ActionListener{
         switch(command){
             case "Add":
                 conn.connect();
-                
+//                mengecek data yang diadd ada atau tidak di database
                 ArrayList<String> listIDs = Controller.getListIDSchedules();
                 int j = 0;
                 boolean isExist = false;

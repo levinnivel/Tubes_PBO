@@ -7,8 +7,6 @@ package view;
 
 import model.*;
 import javax.swing.*;
-import java.awt.*;
-import static model.ActiveEnum.*;
 import view.AdminMenu1.*;
 import view.AdminMenu2.*;
 import view.AdminMenu3.*;
@@ -17,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
 public class AdminMenu implements ActionListener{
+    //set data admin
     Admin admin = UserManager.getInstance().getAdmin();
     
     JFrame adminFrame = new JFrame();
@@ -96,9 +95,4 @@ public class AdminMenu implements ActionListener{
                 break;
         }
     }
-    
-//    public static void main(String[] args){
-//        Admin admTest = new Admin("levin@gmail.com", "Levin Martinus Budiarto", "levin", "081802014646", "AD-01", 4500000);
-//        new AdminMenu(admTest);
-//    }
 }

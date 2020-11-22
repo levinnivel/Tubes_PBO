@@ -15,7 +15,6 @@ import view.MemberMenu5.*;
 import view.GuestMenu.*;
 import model.*;
 import controller.*;
-import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,6 +27,7 @@ import java.sql.Statement;
 public class GuestMemberMenu implements ActionListener{
     static DatabaseHandler conn = new DatabaseHandler();
     
+    //saat login member user null, saat guest member null 
     User user = UserManager.getInstance().getUser();
     User member = UserManager.getInstance().getMember();
     
@@ -51,7 +51,7 @@ public class GuestMemberMenu implements ActionListener{
         GMFrame.setVisible(true);
         
         if(user == null){
-//            Booking book = Controller.getFromDBTest(member.getEmail());
+//            saat login member akan menampilkan nama member di menu
             Booking book = BookingManager.getInstance().getBooking();
             BookingManager.getInstance().setBooking(book);
 
@@ -62,6 +62,7 @@ public class GuestMemberMenu implements ActionListener{
                 if(book.isPaid()==BELUM_LUNAS){
                 String idBook = book.getIdBooking();
                 int priceBook = book.getTotalPrice();
+//              setelah memesan maka akan menampilkan id booking member dan total harga
                 labIDBook = new JLabel("ID Booking : " + idBook);
                 labTotalPrice = new JLabel("Total Price : " + priceBook);
                 labIDBook.setBounds(75,100, 200,20);
@@ -129,6 +130,7 @@ public class GuestMemberMenu implements ActionListener{
                 break;
             case "Top Up":
                 if(user!=null){
+//                  jika guest maka akan diminta register dahulu
                     JOptionPane.showMessageDialog(GMFrame, "Register terlebih dahulu!", "Menu Error",JOptionPane.WARNING_MESSAGE);
                     GMFrame.dispose();
                     new RegisterScreen();
@@ -167,6 +169,7 @@ public class GuestMemberMenu implements ActionListener{
                     GMFrame.dispose();
                     new RegisterScreen();
                 }else{
+                    //jika member akan menampilkan menu refund
                     if(BookingManager.getInstance().getBooking()!=null){
                         GMFrame.dispose();
                         new RefundScreen();
@@ -208,13 +211,4 @@ public class GuestMemberMenu implements ActionListener{
                 break;
         }
     }
-    
-//    public static void main(String[] args){
-//        ArrayList<Booking> bookingsExample = new ArrayList<Booking>();
-//        User memTest = new Member("levin@gmail.com", "Levin Martinus Budiarto", "levin", "081802014646", "Jl. Moh Toha 12", 100, bookingsExample);
-//        
-//        User gueTest = new User();
-//        
-//        new GuestMemberMenu(memTest);
-//    }
 }

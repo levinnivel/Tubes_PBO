@@ -5,20 +5,16 @@
  */
 package view.MemberMenu3;
 
-import controller.Controller;
 import static controller.Controller.buildTableModel;
 import controller.DatabaseHandler;
 import model.*;
 import view.*;
-import controller.DateLabelFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
-import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,11 +22,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import static model.ActiveEnum.*;
-import static model.UsedEnum.*;
 
 public class BillScreen implements ActionListener{
     static DatabaseHandler conn = new DatabaseHandler();
     
+//    get member dan booking yang telah dilakukan
     Member member = UserManager.getInstance().getMember();
     Booking booking = BookingManager.getInstance().getBooking();
     
@@ -82,7 +78,7 @@ public class BillScreen implements ActionListener{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+//        get jumlah penumpang yang memesan
         String query2 = "SELECT COUNT(idPenumpang) FROM detail_penumpang "
                 + "WHERE idBooking='" + booking.getIdBooking() + "'";
         
@@ -95,7 +91,7 @@ public class BillScreen implements ActionListener{
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+//        get jumlah bagasi penumpang
         String query3 = "SELECT SUM(b.bagasiPerKg) "
                 + "FROM detail_penumpang a JOIN penumpang b ON a.idPenumpang=b.idPenumpang "
                 + "WHERE a.idBooking='" + booking.getIdBooking() + "'";
@@ -110,6 +106,7 @@ public class BillScreen implements ActionListener{
             e.printStackTrace();
         }
         
+//        menampilkan data booking berupa tabel
         String query4 = "SELECT a.idPenumpang, b.idKursi, b.namaPenumpang, "
                 + "b.titlePenumpang, b.bagasiPerKg, b.nationalityPenumpang "
                 + "FROM detail_penumpang a JOIN penumpang b ON a.idPenumpang=b.idPenumpang "

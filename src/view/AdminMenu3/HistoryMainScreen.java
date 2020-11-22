@@ -5,7 +5,7 @@
  */
 package view.AdminMenu3;
 
-import controller.Controller;
+import controller.*;
 import javax.swing.*;
 import view.*;
 import static controller.Controller.buildTableModel;
@@ -17,11 +17,9 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import controller.DatabaseHandler;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.table.DefaultTableModel;
 
 public class HistoryMainScreen implements ActionListener{
     static DatabaseHandler conn = new DatabaseHandler();
@@ -45,6 +43,7 @@ public class HistoryMainScreen implements ActionListener{
         historyFrame.setVisible(true);
         
         conn.connect();
+//        menampilkan semua data booking dari database
         String query = "SELECT * from booking";
         try {
             Statement stmt = conn.con.createStatement();

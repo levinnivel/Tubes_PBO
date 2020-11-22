@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import controller.Controller;
+import controller.*;
 import controller.DatabaseHandler;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -79,9 +79,11 @@ public class LoginScreen implements ActionListener{
         String command = e.getActionCommand();
         switch(command){
             case "Login":
+//                mengecek ingin login sebagai apa, jika 0 -> admin, 1 -> member
                 String[] opt = {"Admin", "Member"};
                 int logType = JOptionPane.showOptionDialog(loginFrame, "Masuk sebagai ", "Pilih", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opt, null);
                 conn.connect();
+//                cek admin di database
                 if(logType==0){
                     try {
                         String query = "SELECT * FROM admin WHERE kodeAdmin='" + tfUsername.getText() + "'AND passwordAdmin='" + pfPassword.getText() + "'";
@@ -108,6 +110,7 @@ public class LoginScreen implements ActionListener{
                         excLog.printStackTrace();
                     }
                 }else{
+//                cek member di database
                     try {
                         String query = "SELECT * FROM member WHERE emailMember='" + tfUsername.getText() + "'AND passwordMember='" + pfPassword.getText() + "'";
                         Statement stmt = conn.con.createStatement();

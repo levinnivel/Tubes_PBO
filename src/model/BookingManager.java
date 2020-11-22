@@ -5,11 +5,8 @@
  */
 package model;
 
-import java.util.ArrayList;
-
+//set booking yang terjadi saat member melakukan booking
 public class BookingManager {
-    
-    // lazy instantiation
     private static BookingManager instance;
     private Booking booking;
     

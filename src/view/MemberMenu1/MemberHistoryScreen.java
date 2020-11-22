@@ -47,6 +47,7 @@ public class MemberHistoryScreen implements ActionListener{
         historyFrame.setLayout(null);
         historyFrame.setVisible(true);
         
+//        menampilkan seluruh data booking yang pernah dilakukan member
         conn.connect();
         String query = "SELECT * from booking WHERE emailMember='" + member.getEmail() + "'";
         try {

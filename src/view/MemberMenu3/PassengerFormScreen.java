@@ -9,14 +9,12 @@ import controller.Controller;
 import controller.DatabaseHandler;
 import model.*;
 import view.*;
-import controller.DateLabelFormatter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Properties;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -29,6 +27,7 @@ import static model.UsedEnum.*;
 public class PassengerFormScreen implements ActionListener{
     static DatabaseHandler conn = new DatabaseHandler();
     
+//    get member dan booking
     Member member = UserManager.getInstance().getMember();
     Booking booking = BookingManager.getInstance().getBooking();
     
@@ -54,6 +53,7 @@ public class PassengerFormScreen implements ActionListener{
     
     JButton buttonReg = new JButton("Register");
     
+//  menghitung looping untuk penumpang
     int count = Global.getPassengerCounter();
     
     public PassengerFormScreen(){
@@ -133,6 +133,7 @@ public class PassengerFormScreen implements ActionListener{
                     JOptionPane.showMessageDialog(passFrame, "Pengambilan kursi gagal!", "Seat Error",JOptionPane.WARNING_MESSAGE);
                 }
                 
+//                update data di tabel kursi, mengubah status menjadi terisi karena telah dipilih
                 String query2 = "UPDATE kursi SET statusKursi='TERISI' WHERE idKursi='" + seat.getIdSeat() + "'";
                 try {
                     Statement stmt = conn.con.createStatement();
@@ -145,6 +146,7 @@ public class PassengerFormScreen implements ActionListener{
                 
                 passenger.setSeat(seat);
                 
+//              memasukkan data penumpang ke tabel penumpang
                 String query3 = "INSERT INTO penumpang VALUES(?,?,?,?,?,?)";
                 try {
                     PreparedStatement stmt = conn.con.prepareStatement(query3);
@@ -161,6 +163,7 @@ public class PassengerFormScreen implements ActionListener{
                     JOptionPane.showMessageDialog(passFrame, "Pendaftaran gagal!", "Register Error",JOptionPane.WARNING_MESSAGE);
                 }
                 
+//                memasukkan data penumpang dan id booking ke detail penumpang
                 String query4 = "INSERT INTO detail_penumpang VALUES(?,?)";
                 try {
                     PreparedStatement stmt = conn.con.prepareStatement(query4);
@@ -173,6 +176,7 @@ public class PassengerFormScreen implements ActionListener{
                     JOptionPane.showMessageDialog(passFrame, "Detail gagal!", "Detail Error",JOptionPane.WARNING_MESSAGE);
                 }
                 
+//              akan menampilkan form untuk mengisi data penumpang sebanyak jumlah penumpang 
                 if(passAmount==1 || Global.getPassengerCounter()==passAmount){
                     Global.setPassengerCounter(0);
                     passFrame.dispose();

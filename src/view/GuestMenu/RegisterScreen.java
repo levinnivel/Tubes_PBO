@@ -7,7 +7,6 @@ package view.GuestMenu;
 
 import model.*;
 import view.*;
-import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,9 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import controller.DatabaseHandler;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class RegisterScreen implements ActionListener{
     static DatabaseHandler conn = new DatabaseHandler();
@@ -46,6 +43,7 @@ public class RegisterScreen implements ActionListener{
         regFrame.setLayout(null);
         regFrame.setVisible(true);
         
+//        pengisian data member baru
         labTitle.setBounds(150,30, 100,20);
         labFullName.setBounds(50,70, 100,20);
         labEmail.setBounds(50,100, 100,20);
@@ -95,7 +93,8 @@ public class RegisterScreen implements ActionListener{
                 newMember.setPassword(tfPassword.getText());
                 newMember.setPhoneNum(tfPhone.getText());
                 newMember.setAddress(tfAddress.getText());
-
+                
+//              input data member baru ke database
                 String query = "INSERT INTO member VALUES(?,?,?,?,?,?,?)";
                 try {
                     PreparedStatement stmt = conn.con.prepareStatement(query);
