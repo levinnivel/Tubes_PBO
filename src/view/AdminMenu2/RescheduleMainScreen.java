@@ -36,6 +36,7 @@ public class RescheduleMainScreen implements ActionListener{
     String selectedData = null;
     
     public RescheduleMainScreen(){
+        resFrame.setTitle("Reschedule");
         resFrame.setSize(1300, 550);
         resFrame.setLocationRelativeTo(null);
         resFrame.setLayout(null);

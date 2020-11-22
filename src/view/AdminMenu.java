@@ -28,6 +28,7 @@ public class AdminMenu implements ActionListener{
     JButton buttonLogout = new JButton("Logout");
     
     public AdminMenu(){
+        adminFrame.setTitle("Main Menu");
         adminFrame.setSize(500,450);
         adminFrame.setLocationRelativeTo(null);
         adminFrame.setLayout(null);

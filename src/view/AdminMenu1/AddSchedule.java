@@ -41,6 +41,7 @@ public class AddSchedule implements ActionListener{
     JButton buttonBack = new JButton("Back");
     
     public AddSchedule(){
+        addFrame.setTitle("Add Schedule");
         addFrame.setSize(600,400);
         addFrame.setLocationRelativeTo(null);
         addFrame.setLayout(null);

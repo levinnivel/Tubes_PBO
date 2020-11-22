@@ -36,6 +36,7 @@ public class RefundScreen implements ActionListener{
     JButton buttonBack = new JButton("Back");
     
     public RefundScreen(){
+        refFrame.setTitle("Refund");
         refFrame.setSize(1300, 400);
         refFrame.setLocationRelativeTo(null);
         refFrame.setLayout(null);

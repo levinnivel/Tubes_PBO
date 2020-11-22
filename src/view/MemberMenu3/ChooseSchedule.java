@@ -47,6 +47,7 @@ public class ChooseSchedule implements ActionListener{
     JButton buttonSubmit = new JButton("Submit");
     
     public ChooseSchedule(String kotaAsal, String kotaTujuan, String tglBerangkat,String tipe){
+        schFrame.setTitle("Choose Schedule");
         schFrame.setSize(1300, 500);
         schFrame.setLocationRelativeTo(null);
         schFrame.setLayout(null);

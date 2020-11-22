@@ -42,6 +42,7 @@ public class MemberHistoryScreen implements ActionListener{
         this.listPesawat = listPesawat;
     }
     public MemberHistoryScreen(){
+        historyFrame.setTitle("History");
         historyFrame.setSize(1300, 500);
         historyFrame.setLocationRelativeTo(null);
         historyFrame.setLayout(null);

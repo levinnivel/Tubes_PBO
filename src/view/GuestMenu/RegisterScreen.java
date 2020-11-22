@@ -38,6 +38,7 @@ public class RegisterScreen implements ActionListener{
     JButton buttonBack = new JButton("Back");
     
     public RegisterScreen(){
+        regFrame.setTitle("Register");
         regFrame.setSize(600,350);
         regFrame.setLocationRelativeTo(null);
         regFrame.setLayout(null);
