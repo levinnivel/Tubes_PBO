@@ -10,6 +10,8 @@ import java.util.ArrayList;
 public class Global{
     private static int passengerAmount = 1;
     private static int passengerCounter = 0;
+    private static int totalPrice = 0;
+    private static String selectedIDSchedule;
 
     public static int getPassengerAmount(){
         return Global.passengerAmount;
@@ -26,6 +28,22 @@ public class Global{
 
     public static void setPassengerCounter(int passengerCounter) {
         Global.passengerCounter = passengerCounter;
+    }
+
+    public static String getSelectedIDSchedule() {
+        return selectedIDSchedule;
+    }
+
+    public static void setSelectedIDSchedule(String selectedIDSchedule) {
+        Global.selectedIDSchedule = selectedIDSchedule;
+    }
+
+    public static int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public static void setTotalPrice(int totalPrice) {
+        Global.totalPrice = totalPrice;
     }
     
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.AdminMenu3;
+package view.MemberMenu1;
 
 import controller.Controller;
 import javax.swing.*;
@@ -22,30 +22,33 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
+import model.*;
 
-public class HistoryMainScreen implements ActionListener{
+public class MemberHistoryScreen implements ActionListener{
     static DatabaseHandler conn = new DatabaseHandler();
+    
+    Member member = UserManager.getInstance().getMember();
     
     JFrame historyFrame = new JFrame();
     
     //jlabel
-    JLabel labTitle = new JLabel("All Booking History");
+    JLabel labTitle = new JLabel(member.getFullName() + " Booking History");
     
     JTable listPesawat;
     
     JButton buttonBack = new JButton("Back");
 
-    public HistoryMainScreen(JTable listPesawat) {
+    public MemberHistoryScreen(JTable listPesawat) {
         this.listPesawat = listPesawat;
     }
-    public HistoryMainScreen(){
+    public MemberHistoryScreen(){
         historyFrame.setSize(1300, 500);
         historyFrame.setLocationRelativeTo(null);
         historyFrame.setLayout(null);
         historyFrame.setVisible(true);
         
         conn.connect();
-        String query = "SELECT * from booking";
+        String query = "SELECT * from booking WHERE emailMember='" + member.getEmail() + "'";
         try {
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -75,7 +78,7 @@ public class HistoryMainScreen implements ActionListener{
         switch(command){
             case "Back":
                 historyFrame.dispose();
-                new AdminMenu();
+                new ProfileMenu();
                 break;
         }
     }
