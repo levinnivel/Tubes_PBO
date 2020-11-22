@@ -37,6 +37,7 @@ public class HistoryMainScreen implements ActionListener{
         this.listPesawat = listPesawat;
     }
     public HistoryMainScreen(){
+        historyFrame.setTitle("History");
         historyFrame.setSize(1300, 500);
         historyFrame.setLocationRelativeTo(null);
         historyFrame.setLayout(null);

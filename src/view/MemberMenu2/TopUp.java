@@ -36,10 +36,11 @@ public class TopUp implements ActionListener {
     JRadioButton rmethod4 = new JRadioButton("Alfamart");
     JRadioButton rmethod5 = new JRadioButton("Indomaret");
     ButtonGroup methodTypes = new ButtonGroup();
-    JButton buttonTopUp = new JButton("Top-Up"); //Login by inserting username and password
+    JButton buttonTopUp = new JButton("Top-Up"); 
     JButton buttonBack = new JButton("Back");
     
     public TopUp(){
+        topUpFrame.setTitle("Top Up");
         topUpFrame.setSize(500,350);
         topUpFrame.setLocationRelativeTo(null);
         topUpFrame.setLayout(null);

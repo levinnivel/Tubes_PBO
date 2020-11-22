@@ -50,6 +50,7 @@ public class UpdateScheduleForm implements ActionListener{
     JButton buttonBack = new JButton("Back");
     
     public UpdateScheduleForm(){
+        upFrame.setTitle("Update Schedule");
         upFrame.setSize(600,400);
         upFrame.setLocationRelativeTo(null);
         upFrame.setLayout(null);

@@ -45,6 +45,7 @@ public class GuestMemberMenu implements ActionListener{
     JButton buttonLogout = new JButton("Logout");
     
     public GuestMemberMenu(){
+        GMFrame.setTitle("Main Menu");
         GMFrame.setSize(500,500);
         GMFrame.setLocationRelativeTo(null);
         GMFrame.setLayout(null);

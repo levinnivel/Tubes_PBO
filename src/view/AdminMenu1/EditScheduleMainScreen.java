@@ -36,6 +36,7 @@ public class EditScheduleMainScreen implements ActionListener{
     String selectedData = null;
     
     public EditScheduleMainScreen(){
+        editFrame.setTitle("Edit Schedule");
         editFrame.setSize(1300, 550);
         editFrame.setLocationRelativeTo(null);
         editFrame.setLayout(null);

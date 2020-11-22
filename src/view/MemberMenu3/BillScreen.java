@@ -58,6 +58,7 @@ public class BillScreen implements ActionListener{
     JButton buttonConfirm = new JButton("Confirm Booking");
     
     public BillScreen(){
+        billFrame.setTitle("Bill");
         billFrame.setSize(1300, 550);
         billFrame.setLocationRelativeTo(null);
         billFrame.setLayout(null);

@@ -49,6 +49,7 @@ public class PaymentScreen implements ActionListener{
     JButton buttonBack = new JButton("Back");
     
     public PaymentScreen(){
+        payFrame.setTitle("Payment");
         payFrame.setSize(500,500);
         payFrame.setLocationRelativeTo(null);
         payFrame.setLayout(null);

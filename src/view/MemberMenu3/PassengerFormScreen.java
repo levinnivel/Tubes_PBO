@@ -57,6 +57,7 @@ public class PassengerFormScreen implements ActionListener{
     int count = Global.getPassengerCounter();
     
     public PassengerFormScreen(){
+        passFrame.setTitle("Passenger Form");
         passFrame.setSize(800,350);
         passFrame.setLocationRelativeTo(null);
         passFrame.setLayout(null);

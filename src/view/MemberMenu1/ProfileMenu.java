@@ -33,6 +33,7 @@ public class ProfileMenu implements ActionListener{
     JButton butBack = new JButton("Back");
     
     public ProfileMenu(){
+        proFrame.setTitle("Profile");
         proFrame.setSize(600, 450);
         proFrame.setLocationRelativeTo(null);
         proFrame.setLayout(null);

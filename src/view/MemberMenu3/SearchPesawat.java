@@ -50,6 +50,7 @@ public class SearchPesawat implements ActionListener{
     
     public SearchPesawat(){
         //set frame
+        bookingFrame.setTitle("Search Pesawat");
         bookingFrame.setSize(600, 400);
         bookingFrame.setLocationRelativeTo(null);
         bookingFrame.setLayout(null);
