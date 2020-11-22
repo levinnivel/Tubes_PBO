@@ -102,7 +102,7 @@ public class LoginScreen implements ActionListener{
                             new AdminMenu();
                         }
                         else{
-                        JOptionPane.showMessageDialog(loginFrame, "Pengisian ada yang salah!", "Login Error",JOptionPane.WARNING_MESSAGE);
+                            JOptionPane.showMessageDialog(loginFrame, "Pengisian ada yang salah!", "Login Error",JOptionPane.WARNING_MESSAGE);
                         }
                     } catch (SQLException excLog) {
                         excLog.printStackTrace();
