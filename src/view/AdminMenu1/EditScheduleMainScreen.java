@@ -42,6 +42,7 @@ public class EditScheduleMainScreen implements ActionListener{
         editFrame.setLocationRelativeTo(null);
         editFrame.setLayout(null);
         editFrame.setVisible(true);
+        editFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         conn.connect();
         String query = "SELECT a.idJadwal, b.idPesawat, c.idRute, c.destinasiAsal, c.destinasiAkhir, "

@@ -41,6 +41,7 @@ public class RescheduleMainScreen implements ActionListener{
         resFrame.setLocationRelativeTo(null);
         resFrame.setLayout(null);
         resFrame.setVisible(true);
+        resFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         conn.connect();
         String query = "SELECT a.idJadwal, b.idPesawat, c.idRute, c.destinasiAsal, c.destinasiAkhir, "

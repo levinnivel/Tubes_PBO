@@ -45,6 +45,7 @@ public class RegisterScreen implements ActionListener{
         regFrame.setLocationRelativeTo(null);
         regFrame.setLayout(null);
         regFrame.setVisible(true);
+        regFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         labTitle.setBounds(150,30, 100,20);
         labFullName.setBounds(50,70, 100,20);

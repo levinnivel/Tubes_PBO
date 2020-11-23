@@ -12,12 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Properties;
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -55,7 +50,7 @@ public class SearchPesawat implements ActionListener{
         bookingFrame.setLocationRelativeTo(null);
         bookingFrame.setLayout(null);
         bookingFrame.setVisible(true);
-        bookingFrame.setResizable(false);
+        bookingFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         labTitle.setBounds(220, 10, 200, 30);
         //label kota asal dan text field

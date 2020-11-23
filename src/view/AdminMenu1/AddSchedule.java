@@ -50,6 +50,7 @@ public class AddSchedule implements ActionListener{
         addFrame.setLocationRelativeTo(null);
         addFrame.setLayout(null);
         addFrame.setVisible(true);
+        addFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         labTitle.setBounds(200,30, 200,20);
         labIDSchedule.setBounds(50,70, 100,20);

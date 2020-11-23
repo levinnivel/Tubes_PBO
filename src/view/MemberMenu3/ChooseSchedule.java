@@ -53,6 +53,7 @@ public class ChooseSchedule implements ActionListener{
         schFrame.setLocationRelativeTo(null);
         schFrame.setLayout(null);
         schFrame.setVisible(true);
+        schFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         conn.connect();
         String query = "SELECT a.idJadwal, b.idPesawat, b.kodeMaskapai, c.destinasiAsal, c.destinasiAkhir, "

@@ -11,11 +11,6 @@ import view.*;
 import static controller.Controller.buildTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import controller.DatabaseHandler;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -46,6 +41,7 @@ public class MemberHistoryScreen implements ActionListener{
         historyFrame.setLocationRelativeTo(null);
         historyFrame.setLayout(null);
         historyFrame.setVisible(true);
+        historyFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         conn.connect();
         String query = "SELECT * from booking WHERE emailMember='" + member.getEmail() + "'";

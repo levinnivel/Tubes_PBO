@@ -57,6 +57,7 @@ public class UpdateScheduleForm implements ActionListener{
         upFrame.setLocationRelativeTo(null);
         upFrame.setLayout(null);
         upFrame.setVisible(true);
+        upFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         labTitle.setBounds(250,30, 200,20);
         labIDSchedule = new JLabel("ID : " + idJadwal);

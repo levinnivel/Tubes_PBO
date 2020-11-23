@@ -5,11 +5,11 @@
  */
 package view.MemberMenu1;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import java.awt.event.WindowEvent;
+import javax.swing.*;
 import model.*;
 import view.GuestMemberMenu;
 
@@ -37,7 +37,7 @@ public class ProfileMenu implements ActionListener{
         proFrame.setLocationRelativeTo(null);
         proFrame.setLayout(null);
         proFrame.setVisible(true);
-        proFrame.setResizable(false);
+        proFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         labTitle.setBounds(260, 10, 200, 30);
         labName.setBounds(50, 50, 200, 30);

@@ -42,6 +42,7 @@ public class RefundScreen implements ActionListener{
         refFrame.setLocationRelativeTo(null);
         refFrame.setLayout(null);
         refFrame.setVisible(true);
+        refFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         conn.connect();
         String query = "SELECT a.idBooking, b.idJadwal, c.idPesawat, d.destinasiAsal, d.destinasiAkhir, "

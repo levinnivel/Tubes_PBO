@@ -19,12 +19,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import static model.ActiveEnum.*;
 import static model.UsedEnum.*;
 
@@ -66,6 +61,7 @@ public class BillScreen implements ActionListener{
         billFrame.setLocationRelativeTo(null);
         billFrame.setLayout(null);
         billFrame.setVisible(true);
+        billFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         conn.connect();
         

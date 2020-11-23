@@ -61,6 +61,7 @@ public class PaymentScreen implements ActionListener{
         payFrame.setLocationRelativeTo(null);
         payFrame.setLayout(null);
         payFrame.setVisible(true);
+        payFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         String strPoint = Integer.toString(member.getPoint());
         String strBalance = Integer.toString(member.getBalance());

@@ -45,6 +45,7 @@ public class TopUp implements ActionListener {
         topUpFrame.setLocationRelativeTo(null);
         topUpFrame.setLayout(null);
         topUpFrame.setVisible(true);
+        topUpFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         labTitle.setBounds(150,30, 200,20);
         

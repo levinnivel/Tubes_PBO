@@ -18,12 +18,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 import static model.UsedEnum.*;
 
 public class PassengerFormScreen implements ActionListener{
@@ -61,6 +56,7 @@ public class PassengerFormScreen implements ActionListener{
         passFrame.setLocationRelativeTo(null);
         passFrame.setLayout(null);
         passFrame.setVisible(true);
+        passFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         labTitle.setBounds(450,30, 100,20);
         labNama.setBounds(50,70, 300,20);

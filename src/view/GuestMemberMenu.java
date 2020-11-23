@@ -49,6 +49,7 @@ public class GuestMemberMenu implements ActionListener{
         GMFrame.setLocationRelativeTo(null);
         GMFrame.setLayout(null);
         GMFrame.setVisible(true);
+        GMFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         if(user == null){
 //            Booking book = Controller.getFromDBTest(member.getEmail());

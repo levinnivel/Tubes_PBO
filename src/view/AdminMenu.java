@@ -33,6 +33,7 @@ public class AdminMenu implements ActionListener{
         adminFrame.setLocationRelativeTo(null);
         adminFrame.setLayout(null);
         adminFrame.setVisible(true);
+        adminFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
         String name = admin.getFullName();
         String code = admin.getKodeAdmin();
